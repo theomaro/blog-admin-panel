@@ -22,6 +22,11 @@ export default {
           900: "#A5371B",
         },
       },
+      fontFamily: {
+        display: ["Playfair Display", "serif"],
+        heading: ["Fira Sans Condensed", "serif"],
+        sans: ["Overpass", "sans-serif"],
+      },
     },
   },
 
