@@ -1,0 +1,152 @@
+<script lang="ts">
+  import profileImage from "$lib/images/pavatar.jpg";
+
+  export let user: App.User | null;
+</script>
+
+<form
+  method="post"
+  action="?/updateProfile"
+  class="flex flex-col space-y-8 relative"
+>
+  <div
+    class="flex flex-col gap-1 md:absolute md:top-6 md:-right-52 lg:-right-64"
+  >
+    <label for="">Profile picture</label>
+
+    <div class="relative">
+      <div
+        class="border w-44 lg:w-48 h-44 lg:h-48 rounded-full overflow-hidden"
+      >
+        <img src={user?.avatar_url || profileImage} alt="" class="" />
+      </div>
+
+      <div class="absolute top-3/4">
+        <button
+          type="button"
+          class="bg-gray-50 rounded-lg px-2 py-0.5 text-sm border"
+        >
+          <i class="ri ri-edit-line"></i>
+          Edit</button
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-1">
+    <label for="">Name</label>
+    <input
+      type="text"
+      value={user?.full_name}
+      class="rounded-lg text-sm text-gray-700 bg-gray-50"
+    />
+  </div>
+
+  <div class="flex flex-col gap-1">
+    <label for="">Email</label>
+    <input
+      type="email"
+      value={user?.email}
+      class="rounded-lg text-sm text-gray-700 bg-gray-50"
+    />
+  </div>
+
+  <div class="flex flex-col gap-1">
+    <label for="">Bio</label>
+    <textarea class="rounded-lg h-20 text-sm text-gray-700 bg-gray-50"
+      >{user?.biography}</textarea
+    >
+  </div>
+
+  <div class="flex flex-col gap-1">
+    <label for="">Phone</label>
+    <input
+      type="tel"
+      value={user?.phone}
+      class="rounded-lg text-sm text-gray-700 bg-gray-50"
+    />
+  </div>
+
+  <div class="flex flex-col gap-1">
+    <label for="">Sex</label>
+    <select name="" id="" class="rounded-lg text-sm text-gray-700 bg-gray-50">
+      <option value="">Not specified</option>
+      <option value="">Female</option>
+      <option value="">Male</option>
+    </select>
+  </div>
+
+  <div class="flex flex-col gap-1">
+    <label for="">Birthdate</label>
+    <input
+      type="date"
+      value={user?.birth_date}
+      class="rounded-lg text-sm text-gray-700 bg-gray-50"
+    />
+  </div>
+
+  <div class="flex flex-col gap-1">
+    <label for="">Location</label>
+    <input
+      type="text"
+      value={user?.country}
+      class="rounded-lg text-sm text-gray-700 bg-gray-50"
+    />
+  </div>
+
+  <div>
+    <h2 class="mb-2">Social accounts</h2>
+
+    <div class="flex gap-2 mb-2">
+      <label for="">
+        <div class="ri ri-facebook-fill"></div>
+      </label>
+      <input
+        type="text"
+        value="https://www.facebook/theomaro"
+        class="rounded-lg text-xs text-gray-700 bg-gray-50 py-1 flex-1"
+      />
+    </div>
+
+    <div class="flex gap-2 mb-2">
+      <label for="">
+        <div class="ri ri-twitter-fill"></div>
+      </label>
+      <input
+        type="text"
+        value="https://twitter.com/theopombe"
+        class="rounded-lg text-xs text-gray-700 bg-gray-50 py-1 flex-1"
+      />
+    </div>
+
+    <div class="flex gap-2 mb-2">
+      <label for="">
+        <div class="ri ri-link"></div>
+      </label>
+      <input
+        type="text"
+        placeholder="Link to social profile"
+        class="rounded-lg text-xs text-gray-700 bg-gray-50 py-1 flex-1"
+      />
+    </div>
+
+    <div class="flex gap-2 mb-2">
+      <label for="">
+        <div class="ri ri-link"></div>
+      </label>
+      <input
+        type="text"
+        placeholder="Link to social profile"
+        class="rounded-lg text-xs text-gray-700 bg-gray-50 py-1 flex-1"
+      />
+    </div>
+  </div>
+
+  <div>
+    <button
+      type="submit"
+      class="font-semibold text-sm text-white bg-green-600 hover:bg-green-700 py-2 px-5 rounded-lg"
+      >Update profile</button
+    >
+  </div>
+</form>

@@ -1,0 +1,174 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "full_name": "Joseph Maro",
+      "avatar_url": "https://images.unsplash.com/photo-1540845511934-7721dd7adec3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80",
+      "role": "editor",
+      "email": "josemaro@company.net",
+      "phone": "789-000-000",
+      "last_login_at": "Feb 18, 2020"
+    },
+    {
+      "id": "2",
+      "full_name": "Alonzo Cox",
+      "avatar_url": "https://images.unsplash.com/photo-1522609925277-66fea332c575?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&h=160&w=160&q=80",
+      "role": "reader",
+      "email": "shaban.adam@email.com",
+      "phone": "789-000-000",
+      "last_login_at": "Feb 18, 2020"
+    },
+    {
+      "id": "3",
+      "full_name": "Dana Moore",
+      "avatar_url": "https://images.unsplash.com/photo-1540845511934-7721dd7adec3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80",
+      "role": "reader",
+      "email": "josemaro@company.net",
+      "phone": "789-000-000",
+      "last_login_at": "Feb 18, 2020"
+    },
+    {
+      "id": "4",
+      "full_name": "Jane Smitch",
+      "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80",
+      "role": "author",
+      "email": "smitchj@company.net",
+      "phone": "523-222-222",
+      "last_login_at": "Feb 18, 2020"
+    },
+    {
+      "id": "5",
+      "full_name": "Blake Bowman",
+      "avatar_url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80",
+      "role": "reader",
+      "email": "shaban.adam@email.com",
+      "phone": "789-000-000",
+      "last_login_at": "Feb 18, 2020"
+    },
+    {
+      "id": "6",
+      "full_name": "Shaban Adam",
+      "avatar_url": "smitchj@company.net",
+      "role": "admin",
+      "email": "shaban.adam@email.com",
+      "phone": "684-111-111",
+      "last_login_at": "Jan 21, 2020"
+    },
+    {
+      "id": "7",
+      "full_name": "Vera Carpenter",
+      "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80",
+      "role": "author",
+      "email": "smitchj@company.net",
+      "phone": "523-222-222",
+      "last_login_at": "Feb 18, 2020"
+    }
+  ],
+  "posts": [
+    {
+      "id": "",
+      "title": "This is my third & latest post",
+      "summary": "Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.",
+      "slug_url": "this-is-latest-post",
+      "status": "published",
+      "author": {
+        "id": "",
+        "full_name": "Jane Smitch",
+        "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
+      },
+      "modified_at": "23 SEP 2023"
+    },
+    {
+      "id": "",
+      "title": "This is my second post",
+      "summary": "Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.",
+      "slug_url": "this-is-second-post",
+      "status": "draft",
+      "author": {
+        "id": "",
+        "full_name": "Vera Carpenter",
+        "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
+      },
+      "modified_at": "01 JAN 2024"
+    },
+    {
+      "id": "",
+      "title": "This is my first post",
+      "summary": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps.",
+      "slug_url": "this-is-first-post",
+      "status": "archived",
+      "author": {
+        "id": "",
+        "full_name": "Jane Smitch",
+        "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
+      },
+      "modified_at": "17 JUL 2023"
+    }
+  ],
+  "comments": [
+    {
+      "id": "",
+      "content": "Bring to the table win-win survival strategies to ensure proactive domination.",
+      "status": "approved",
+      "author": {
+        "id": "",
+        "full_name": "Jane Smitch",
+        "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
+      },
+      "post": {
+        "id": "",
+        "title": "This is my third & latest post",
+        "slug_url": "this-is-latest-post"
+      },
+      "modified_at": "23 SEP 2023"
+    },
+    {
+      "id": "",
+      "content": "Bring to the table win-win survival strategies to ensure proactive domination.",
+      "status": "disapproved",
+      "author": {
+        "id": "",
+        "full_name": "Jane Smitch",
+        "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
+      },
+      "post": {
+        "id": "",
+        "title": "This is my second post",
+        "slug_url": "this-is-second-post"
+      },
+      "modified_at": "23 SEP 2023"
+    },
+    {
+      "id": "",
+      "content": "Bring to the table win-win survival strategies to ensure proactive domination.",
+      "status": "pending",
+      "author": {
+        "id": "",
+        "full_name": "Jane Smitch",
+        "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
+      },
+      "post": {
+        "id": "",
+        "title": "This is my third & latest post",
+        "slug_url": "this-is-latest-post"
+      },
+      "modified_at": "23 SEP 2023"
+    },
+    {
+      "id": "",
+      "content": "Bring to the table win-win survival strategies to ensure proactive domination.",
+      "status": "approved",
+      "author": {
+        "id": "",
+        "full_name": "Jane Smitch",
+        "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
+      },
+      "post": {
+        "id": "",
+        "title": "This is my first post",
+        "slug_url": "this-is-first-post"
+      },
+      "modified_at": "23 SEP 2023"
+    }
+  ]
+}
