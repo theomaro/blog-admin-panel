@@ -34,62 +34,79 @@
   </div>
 
   <div class="flex flex-col gap-1">
-    <label for="">Name</label>
+    <label for="full_name">Name</label>
     <input
       type="text"
+      id="full_name"
+      name="full_name"
       value={user?.full_name}
       class="rounded-lg text-sm text-gray-700 bg-gray-50"
     />
   </div>
 
   <div class="flex flex-col gap-1">
-    <label for="">Email</label>
+    <label for="email">Email</label>
     <input
       type="email"
+      id="email"
+      name="email"
       value={user?.email}
       class="rounded-lg text-sm text-gray-700 bg-gray-50"
     />
   </div>
 
   <div class="flex flex-col gap-1">
-    <label for="">Bio</label>
-    <textarea class="rounded-lg h-20 text-sm text-gray-700 bg-gray-50"
+    <label for="biography">Bio</label>
+    <textarea
+      id="biography"
+      name="biography"
+      class="rounded-lg h-20 text-sm text-gray-700 bg-gray-50"
       >{user?.biography}</textarea
     >
   </div>
 
   <div class="flex flex-col gap-1">
-    <label for="">Phone</label>
+    <label for="phone">Phone</label>
     <input
       type="tel"
+      id="phone"
+      name="phone"
       value={user?.phone}
       class="rounded-lg text-sm text-gray-700 bg-gray-50"
     />
   </div>
 
   <div class="flex flex-col gap-1">
-    <label for="">Sex</label>
-    <select name="" id="" class="rounded-lg text-sm text-gray-700 bg-gray-50">
-      <option value="">Not specified</option>
-      <option value="">Female</option>
-      <option value="">Male</option>
+    <label for="sex">Sex</label>
+    <select
+      name="sex"
+      id="sex"
+      class="rounded-lg text-sm text-gray-700 bg-gray-50"
+    >
+      <option value="Not specified">Not specified</option>
+      <option value="female">Female</option>
+      <option value="male">Male</option>
     </select>
   </div>
 
   <div class="flex flex-col gap-1">
-    <label for="">Birthdate</label>
+    <label for="birth_date">Birthdate</label>
     <input
       type="date"
+      id="birth_date"
+      name="birth_date"
       value={user?.birth_date}
       class="rounded-lg text-sm text-gray-700 bg-gray-50"
     />
   </div>
 
   <div class="flex flex-col gap-1">
-    <label for="">Location</label>
+    <label for="location">Location</label>
     <input
       type="text"
-      value={user?.country}
+      id="location"
+      name="location"
+      value={user?.location}
       class="rounded-lg text-sm text-gray-700 bg-gray-50"
     />
   </div>

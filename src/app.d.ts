@@ -20,7 +20,7 @@ declare global {
       phone: string | null;
       email: string;
       biography: string | null;
-      country: string | null;
+      location: string | null;
       avatar_url: string | null;
       current_status: string;
       modified_at: string | null;
