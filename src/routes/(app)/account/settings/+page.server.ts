@@ -86,4 +86,46 @@ export const actions: Actions = {
     cookies.delete("session", { path: "/", httpOnly: true, sameSite: true });
     throw redirect(303, "/signin");
   },
+
+  changeUsername: async ({ request, fetch, cookies }) => {
+    const formData = await request.formData();
+    const username = formData.get("username") ?? "";
+
+    // validate user input
+    const isUsernameValid = await z
+      .object({
+        username: z
+          .string({ required_error: "Username field is required" })
+          .min(5, { message: "Username must be at least 5 character long" })
+          .max(30, { message: "Username must be less than 30 character" })
+          .trim(),
+      })
+      .safeParseAsync({ username });
+
+    if (!isUsernameValid.success)
+      return {
+        results: {
+          username,
+        },
+        errors: {
+          message: isUsernameValid.error.format().username?._errors[0],
+        },
+      };
+
+    // send data to the server to update a username
+    const res = await fetch("http://localhost:3000/api/users/change-username", {
+      method: "PUT",
+      body: JSON.stringify({ token: cookies.get("session"), username }),
+      headers: {
+        "content-type": "application/json",
+      },
+    }).then((results) => results.json());
+
+    if (!res.success)
+      return {
+        errors: { message: res.message },
+      };
+
+    throw redirect(303, "/account/settings");
+  },
 };

@@ -7,19 +7,29 @@
   let errors = form?.errors;
 
   let deleteModal: HTMLDivElement;
+  let changeUsernameModal: HTMLDivElement;
 
   let username = "",
     verify = "",
     password = "";
 
-  function toggleDeleteModal(
+  const toggleDeleteModal = (
     event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
-  ) {
+  ) => {
     deleteModal.classList.toggle("hidden");
-  }
+  };
 
-  $: disabled =
+  const toggleUsernameModal = (
+    event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
+  ) => {
+    changeUsernameModal.classList.toggle("hidden");
+  };
+
+  let checkUsername: string;
+
+  $: disableDelete =
     username && password && verify.includes("delete my account") ? false : true;
+  $: disableUsername = username ? false : true;
 </script>
 
 <svelte:head>
@@ -49,9 +59,57 @@
         </p>
 
         <button
+          type="button"
+          on:click={toggleUsernameModal}
           class="border rounded-lg text-gray-700 text-sm font-semibold px-6 py-1"
           >Change username</button
         >
+
+        <!--  -->
+        <div
+          bind:this={changeUsernameModal}
+          class="hidden absolute z-50 left-0 right-0 top-0 bottom-0 bg-gray-50 bg-opacity-30"
+        >
+          <div
+            class="bg-white shadow-lg rounded-md w-full max-w-sm mx-auto mt-7"
+          >
+            <div class="py-2 px-4 flex items-center justify-between border-b">
+              <h3 class="font-semibold text-sm">Enter a new username</h3>
+
+              <button
+                on:click={toggleUsernameModal}
+                type="button"
+                class="border border-transparent hover:border-gray-300 px-1"
+              >
+                <div class="ri ri-close-line text-lg"></div>
+              </button>
+            </div>
+
+            <form action="?/changeUsername" method="post" class="p-4 space-y-4">
+              <div class="flex flex-col space-y-1">
+                <input
+                  id="change-uname"
+                  name="username"
+                  bind:value={username}
+                  type="text"
+                  class="border border-gray-300 py-1 px-2.5 rounded-lg text-sm focus:border-blue-500"
+                />
+                <label for="change-uname" class="text-xs"
+                  >{checkUsername ?? "Choose a new username"}</label
+                >
+              </div>
+
+              <div>
+                <button
+                  disabled={disableUsername}
+                  type="submit"
+                  class="bg-green-500 bg-opacity-95 text-white rounded-lg w-full text-sm py-1.5 text-center disabled:bg-emerald-300 disabled:font-semibold"
+                  >Change my username</button
+                >
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </article>
 
@@ -174,7 +232,7 @@
 
           <div>
             <button
-              {disabled}
+              disabled={disableDelete}
               type="submit"
               class="bg-red-800 bg-opacity-95 text-white rounded-lg w-full text-sm py-1.5 text-center disabled:bg-gray-200 disabled:text-red-700"
               >Delete this account</button
