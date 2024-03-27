@@ -32,9 +32,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 };
 
 // custom redirect from joy of code `https://github.com/JoysOfCode/sveltekit-auth-cookies/blob/migration/src/hooks.ts`
-function redirect(location: string, body?: string) {
-  return new Response(body, {
+const redirect = (location: string, body?: string) =>
+  new Response(body, {
     status: 303,
     headers: { location },
   });
-}

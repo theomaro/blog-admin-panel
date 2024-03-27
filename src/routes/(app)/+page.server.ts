@@ -6,7 +6,7 @@ export const actions: Actions = {
     // get a cookie
     // check if token are valid
     // delete that cookie token for that specific user
-    cookies.delete("session");
+    cookies.delete("session", { path: "/", httpOnly: true, sameSite: true });
     throw redirect(303, "/signin");
   },
 };

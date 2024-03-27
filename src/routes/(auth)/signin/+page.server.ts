@@ -49,7 +49,7 @@ export const actions: Actions = {
         headers: { "content-type": "application/json" },
       }).then((results) => results.json());
 
-      if (!res.success) {
+      if (!res.success)
         return {
           results: {
             username,
@@ -57,7 +57,6 @@ export const actions: Actions = {
           },
           errors: { message: res.message },
         };
-      }
 
       cookies.set("session", res.token, {
         path: "/",

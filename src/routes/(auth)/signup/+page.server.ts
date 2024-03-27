@@ -69,7 +69,7 @@ export const actions: Actions = {
         headers: { "content-type": "application/json" },
       }).then((res) => res.json());
 
-      if (!res.success) {
+      if (!res.success)
         return {
           results: {
             email,
@@ -79,7 +79,6 @@ export const actions: Actions = {
           },
           errors: { message: res.message },
         };
-      }
 
       throw redirect(303, "/signin");
     }
