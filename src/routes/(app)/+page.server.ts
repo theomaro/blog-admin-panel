@@ -20,4 +20,3 @@ export const load: PageServerLoad = async ({ parent }) => {
     someData: "", // TODO
   };
 };
-// Jos2018(Mat
