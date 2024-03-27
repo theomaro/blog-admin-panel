@@ -14,7 +14,7 @@ export const handle: Handle = async ({ event, resolve }) => {
   // check if token is valid and give access to a only that user
   // get user data from database
   const res = await event
-    .fetch("http://localhost:3000/api/auth/user", {
+    .fetch("http://localhost:3000/api/users", {
       method: "POST",
       body: JSON.stringify({
         token: session,
