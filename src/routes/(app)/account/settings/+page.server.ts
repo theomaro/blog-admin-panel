@@ -20,6 +20,32 @@ const deleteSchema = z.object({
     .trim(),
 });
 
+const passwordSchema = z
+  .object({
+    oldPassword: z
+      .string({ required_error: "Old password is required" })
+      .min(8, { message: "Password must be at least 8 character long" })
+      .trim(),
+    newPassword: z
+      .string({ required_error: "New password is required" })
+      .min(8, { message: "Password must be at least 8 character long" })
+      .trim(),
+    confirmedNewPassword: z
+      .string({ required_error: "You must confirm your new password" })
+      .trim(),
+  })
+  .refine(async (values) => values.oldPassword !== values.newPassword, {
+    message: "New password must be different",
+    path: ["newPassword"],
+  })
+  .refine(
+    async (values) => values.newPassword === values.confirmedNewPassword,
+    {
+      message: "New password must match",
+      path: ["confirmedNewPassword"],
+    }
+  );
+
 export const load: PageServerLoad = async ({ parent }) => {
   await parent();
 
@@ -127,5 +153,53 @@ export const actions: Actions = {
       };
 
     throw redirect(303, "/account/settings");
+  },
+
+  changePassword: async ({ cookies, fetch, request }) => {
+    const formData = await request.formData();
+
+    const oldPassword = formData.get("old-password") ?? "";
+    const newPassword = formData.get("new-password") ?? "";
+    const confirmedNewPassword = formData.get("confirmed-new-password") ?? "";
+
+    // validate user input
+    const validator = await passwordSchema.safeParseAsync({
+      oldPassword,
+      newPassword,
+      confirmedNewPassword,
+    });
+
+    if (!validator.success) {
+      const errors = validator.error.format();
+
+      return {
+        errors: {
+          message:
+            errors.oldPassword?._errors[0] ||
+            errors.newPassword?._errors[0] ||
+            errors.confirmedNewPassword?._errors[0],
+        },
+      };
+    }
+
+    // send data to the server to update a username
+    const res = await fetch("http://localhost:3000/api/users/change-password", {
+      method: "PUT",
+      body: JSON.stringify({
+        token: cookies.get("session"),
+        ...validator.data,
+      }),
+      headers: { "content-type": "application/json" },
+    }).then((results) => results.json());
+
+    if (!res.success) {
+      return {
+        errors: { message: res.message },
+      };
+    }
+
+    // delete session cookie and redirect to login page
+    cookies.delete("session", { path: "/", httpOnly: true, sameSite: true });
+    throw redirect(303, "/signin");
   },
 };

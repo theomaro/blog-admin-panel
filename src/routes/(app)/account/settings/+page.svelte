@@ -8,10 +8,14 @@
 
   let deleteModal: HTMLDivElement;
   let changeUsernameModal: HTMLDivElement;
+  let changePasswordModal: HTMLDivElement;
 
-  let username = "",
-    verify = "",
-    password = "";
+  let username: string = "",
+    verify: string = "",
+    password: string = "",
+    oldPassword: string = "",
+    newPassword: string = "",
+    confirmedNewPassword: string = "";
 
   const toggleDeleteModal = (
     event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
@@ -25,11 +29,18 @@
     changeUsernameModal.classList.toggle("hidden");
   };
 
+  const togglePasswordModal = (
+    event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
+  ) => {
+    changePasswordModal.classList.toggle("hidden");
+  };
+
   let checkUsername: string;
 
   $: disableDelete =
     username && password && verify.includes("delete my account") ? false : true;
   $: disableUsername = username ? false : true;
+  $: disablePassword = username ? false : true;
 </script>
 
 <svelte:head>
@@ -123,9 +134,83 @@
         </p>
 
         <button
+          on:click={togglePasswordModal}
           class="border rounded-lg text-gray-700 text-sm font-semibold px-6 py-1"
           >Change password</button
         >
+      </div>
+
+      <!--  -->
+      <div
+        bind:this={changePasswordModal}
+        class="hidden absolute z-50 left-0 right-0 top-0 bottom-0 bg-gray-50 bg-opacity-30"
+      >
+        <div class="bg-white shadow-lg rounded-md w-full max-w-sm mx-auto mt-7">
+          <div class="py-2 px-4 flex items-center justify-between border-b">
+            <h3 class="font-semibold text-sm">Change your password</h3>
+
+            <button
+              on:click={togglePasswordModal}
+              type="button"
+              class="border border-transparent hover:border-gray-300 px-1"
+            >
+              <div class="ri ri-close-line text-lg"></div>
+            </button>
+          </div>
+
+          <form action="?/changePassword" method="post" class="p-4 space-y-6">
+            <div class="flex flex-col space-y-1">
+              <label for="old-password" class="text-sm font-semibold"
+                >Old password:</label
+              >
+              <input
+                id="old-password"
+                name="old-password"
+                bind:value={oldPassword}
+                type="password"
+                class="border border-gray-300 py-1 px-2.5 rounded-lg text-sm focus:border-blue-500"
+              />
+            </div>
+            <div class="flex flex-col space-y-1">
+              <label for="new-password" class="text-sm font-semibold"
+                >New password:</label
+              >
+              <input
+                id="new-password"
+                name="new-password"
+                bind:value={newPassword}
+                type="password"
+                class="border border-gray-300 py-1 px-2.5 rounded-lg text-sm focus:border-blue-500"
+              />
+            </div>
+
+            <div class="flex flex-col space-y-1">
+              <label for="confirmed-new-password" class="text-sm font-semibold"
+                >Confirmed new password:</label
+              >
+              <input
+                id="confirmed-new-password"
+                name="confirmed-new-password"
+                bind:value={confirmedNewPassword}
+                type="password"
+                class="border border-gray-300 py-1 px-2.5 rounded-lg text-sm focus:border-blue-500"
+              />
+            </div>
+
+            <div class="flex items-center gap-x-4">
+              <button
+                type="submit"
+                class="bg-gray-100 border border-gray-300 bg-opacity-95 text-black rounded-lg text-sm py-1 px-4 text-center font-semibold"
+                >Update password</button
+              >
+
+              <a
+                href="account/settings/password-reset"
+                class="text-sm text-sky-500 p-1">I forgot my password</a
+              >
+            </div>
+          </form>
+        </div>
       </div>
     </article>
 
