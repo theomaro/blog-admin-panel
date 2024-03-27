@@ -68,8 +68,10 @@ export const actions: Actions = {
       method: "DELETE",
       body: JSON.stringify({
         token: cookies.get("session"),
-        username,
-        password,
+        user: {
+          username,
+          password,
+        },
       }),
       headers: { "content-type": "application/json" },
     }).then((results) => results.json());
