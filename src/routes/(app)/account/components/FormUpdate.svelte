@@ -60,9 +60,9 @@
     <textarea
       id="biography"
       name="biography"
+      value={user?.biography ?? ""}
       class="rounded-lg h-20 text-sm text-gray-700 bg-gray-50"
-      >{user?.biography}</textarea
-    >
+    ></textarea>
   </div>
 
   <div class="flex flex-col gap-1">
@@ -83,7 +83,7 @@
       id="sex"
       class="rounded-lg text-sm text-gray-700 bg-gray-50"
     >
-      <option value="Not specified">Not specified</option>
+      <option value="">Not specified</option>
       <option value="female">Female</option>
       <option value="male">Male</option>
     </select>
