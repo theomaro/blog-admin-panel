@@ -8,17 +8,19 @@
 <div class="pe-2 lg:px-6 w-full max-w-[98rem] mx-auto">
   <Header user={data.currentUser} />
 
-  <div class="flex mt-3">
+  <div class="flex mt-3 min-h-[89vh] 2xl:min-h-[93vh]">
     <aside
-      class="min-h-[92vh] bg-gray-50 flex flex-col justify-between w-16 lg:basis-1/5"
+      class="bg-gray-50 flex flex-col justify-between w-16 lg:basis-1/5 relative"
     >
       <SideBar user={data.currentUser} />
     </aside>
 
     <div
-      class="shadow-md basis-full py-2 px-8 border-t border-r rounded-tr-lg border-gray-200"
+      class="shadow-md basis-full border-t border-r rounded-tr-lg border-gray-200 overflow-y-auto"
     >
-      <slot />
+      <div class="max-h-[89vh] 2xl:max-h-[93vh] pt-3 px-8">
+        <slot />
+      </div>
     </div>
   </div>
 </div>

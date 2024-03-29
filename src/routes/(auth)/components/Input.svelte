@@ -2,7 +2,7 @@
   export let placeholder: string;
   export let type: string;
   export let name: string = "";
-  export let inputValue: FormDataEntryValue;
+  export let inputValue: FormDataEntryValue | null = null;
 </script>
 
 <input

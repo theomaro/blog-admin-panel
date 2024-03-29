@@ -46,11 +46,7 @@
   </div>
   <div>
     <Label forId="password" text="password" />
-    <Input
-      inputValue={formData?.password ?? ""}
-      type="password"
-      placeholder="••••••••"
-    />
+    <Input type="password" placeholder="••••••••" />
     {#if errors?.password && !errors?.username}
       <Error text={errors?.password} />
     {/if}

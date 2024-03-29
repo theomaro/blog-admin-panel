@@ -4,20 +4,14 @@
   export let user: App.User | null;
 </script>
 
-<form
-  method="post"
-  action="?/updateProfile"
-  class="flex flex-col space-y-8 relative"
->
+<form method="post" action="?/updateProfile" class="flex flex-col relative">
   <div
     class="flex flex-col gap-1 md:absolute md:top-6 md:-right-52 lg:-right-64"
   >
-    <label for="">Profile picture</label>
+    <label class="text-sm font-semibold mb-2" for="">Profile picture</label>
 
-    <div class="relative">
-      <div
-        class="border w-44 lg:w-48 h-44 lg:h-48 rounded-full overflow-hidden"
-      >
+    <div class="relative mb-6">
+      <div class="border w-28 md:w-32 lg:w-40 rounded-full overflow-hidden">
         <img src={user?.avatar_url || profileImage} alt="" class="" />
       </div>
 
@@ -33,30 +27,30 @@
     </div>
   </div>
 
-  <div class="flex flex-col gap-1">
-    <label for="full_name">Name</label>
+  <div class="flex flex-col gap-1 mb-5">
+    <label class="text-sm font-semibold" for="full_name">Name</label>
     <input
       type="text"
       id="full_name"
       name="full_name"
       value={user?.full_name}
-      class="rounded-lg text-sm text-gray-700 bg-gray-50"
+      class="rounded-lg text-xs sm:text-sm px-2 md:px-2.5 py-1 md:py-1.5 text-gray-700 bg-gray-50 bg-opacity-60"
     />
   </div>
 
-  <div class="flex flex-col gap-1">
-    <label for="email">Email</label>
+  <div class="flex flex-col gap-1 mb-5">
+    <label class="text-sm font-semibold" for="email">Email</label>
     <input
       type="email"
       id="email"
       name="email"
       value={user?.email}
-      class="rounded-lg text-sm text-gray-700 bg-gray-50"
+      class="rounded-lg text-xs sm:text-sm px-2 md:px-2.5 py-1 md:py-1.5 text-gray-700 bg-gray-50 bg-opacity-60"
     />
   </div>
 
-  <div class="flex flex-col gap-1">
-    <label for="biography">Bio</label>
+  <div class="flex flex-col gap-1 mb-5">
+    <label class="text-sm font-semibold" for="biography">Bio</label>
     <textarea
       id="biography"
       name="biography"
@@ -65,23 +59,24 @@
     ></textarea>
   </div>
 
-  <div class="flex flex-col gap-1">
-    <label for="phone">Phone</label>
+  <div class="flex flex-col gap-1 mb-5">
+    <label class="text-sm font-semibold" for="phone">Phone</label>
     <input
       type="tel"
       id="phone"
       name="phone"
       value={user?.phone}
-      class="rounded-lg text-sm text-gray-700 bg-gray-50"
+      class="rounded-lg text-xs sm:text-sm px-2 md:px-2.5 py-1 md:py-1.5 text-gray-700 bg-gray-50 bg-opacity-60"
     />
   </div>
 
-  <div class="flex flex-col gap-1">
-    <label for="sex">Sex</label>
+  <div class="flex flex-col gap-1 mb-5">
+    <label class="text-sm font-semibold" for="sex">Sex</label>
     <select
       name="sex"
       id="sex"
-      class="rounded-lg text-sm text-gray-700 bg-gray-50"
+      value={user?.sex ?? ""}
+      class="rounded-lg text-xs sm:text-sm px-2 md:px-2.5 py-1 md:py-1.5 text-gray-700 bg-gray-50 bg-opacity-60"
     >
       <option value="">Not specified</option>
       <option value="female">Female</option>
@@ -89,33 +84,33 @@
     </select>
   </div>
 
-  <div class="flex flex-col gap-1">
-    <label for="birth_date">Birthdate</label>
+  <div class="flex flex-col gap-1 mb-5">
+    <label class="text-sm font-semibold" for="birth_date">Birthdate</label>
     <input
       type="date"
       id="birth_date"
       name="birth_date"
-      value={user?.birth_date}
-      class="rounded-lg text-sm text-gray-700 bg-gray-50"
+      value={user?.birth_date?.slice(0, 10)}
+      class="rounded-lg text-xs sm:text-sm px-2 md:px-2.5 py-1 md:py-1.5 text-gray-700 bg-gray-50 bg-opacity-60"
     />
   </div>
 
-  <div class="flex flex-col gap-1">
-    <label for="location">Location</label>
+  <div class="flex flex-col gap-1 mb-5">
+    <label class="text-sm font-semibold" for="location">Location</label>
     <input
       type="text"
       id="location"
       name="location"
       value={user?.location}
-      class="rounded-lg text-sm text-gray-700 bg-gray-50"
+      class="rounded-lg text-xs sm:text-sm px-2 md:px-2.5 py-1 md:py-1.5 text-gray-700 bg-gray-50 bg-opacity-60"
     />
   </div>
 
-  <div>
+  <div class="hidden">
     <h2 class="mb-2">Social accounts</h2>
 
     <div class="flex gap-2 mb-2">
-      <label for="">
+      <label class="text-sm font-semibold" for="">
         <div class="ri ri-facebook-fill"></div>
       </label>
       <input
@@ -126,7 +121,7 @@
     </div>
 
     <div class="flex gap-2 mb-2">
-      <label for="">
+      <label class="text-sm font-semibold" for="">
         <div class="ri ri-twitter-fill"></div>
       </label>
       <input
@@ -137,7 +132,7 @@
     </div>
 
     <div class="flex gap-2 mb-2">
-      <label for="">
+      <label class="text-sm font-semibold" for="">
         <div class="ri ri-link"></div>
       </label>
       <input
@@ -148,7 +143,7 @@
     </div>
 
     <div class="flex gap-2 mb-2">
-      <label for="">
+      <label class="text-sm font-semibold" for="">
         <div class="ri ri-link"></div>
       </label>
       <input

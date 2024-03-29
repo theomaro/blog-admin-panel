@@ -1,16 +1,17 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
   import profileImage from "$lib/images/pavatar.jpg";
   export let user: App.User | null;
 
-  function handleProfile(
-    event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
-  ) {
-    const parent = event.currentTarget.parentElement;
-    parent?.classList.toggle("show");
-  }
+  let showContainer: HTMLDivElement;
+
+  const handleProfile = (url: string = "") => {
+    if (url) goto(url);
+    showContainer?.classList.toggle("show");
+  };
 </script>
 
-<header class="w-full py-2.5 flex items-center justify-between">
+<header class="w-full py-1 flex items-center justify-between">
   <div class="flex items-center justify-between">
     <button
       class="font-display font-bold text-2xl lg:text-3xl hover:text-gray-700"
@@ -20,10 +21,13 @@
     >
   </div>
 
-  <div class="flex justify-end group {user ? 'flex' : 'hidden'}">
+  <div
+    bind:this={showContainer}
+    class="flex justify-end group {user ? 'flex' : 'hidden'}"
+  >
     <button
       type="button"
-      on:click={handleProfile}
+      on:click={() => handleProfile()}
       class="w-10 h-10 rounded-full overflow-hidden border-4 border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none"
     >
       <img src={user?.avatar_url || profileImage} alt="" />
@@ -33,26 +37,28 @@
       class="hidden group-[.show]:block absolute top-14 w-32 bg-white rounded-lg shadow-lg py-2"
     >
       <li>
-        <a
-          href="/account/profile"
-          class="block px-4 py-2 hover:bg-primary-600 hover:text-white"
-          >Profile</a
+        <button
+          on:click={() => handleProfile("/account/profile")}
+          class="w-full text-start px-4 py-2 hover:bg-primary-600 hover:text-white"
+          >Profile</button
         >
       </li>
       <li>
-        <a
-          href="/account/settings"
-          class="block px-4 py-2 hover:bg-primary-600 hover:text-white"
-          >My account</a
+        <button
+          on:click={() => handleProfile("/account/settings")}
+          class="w-full text-start px-4 py-2 hover:bg-primary-600 hover:text-white"
+          >My account</button
         >
       </li>
       <li>
         <form
           method="post"
-          action="?/signout"
+          action="/?/signout"
           class="block px-4 py-2 hover:bg-primary-600 hover:text-white"
         >
-          <button type="submit">Sign Out</button>
+          <button on:click={() => handleProfile()} type="submit"
+            >Sign Out</button
+          >
         </form>
       </li>
     </ul>

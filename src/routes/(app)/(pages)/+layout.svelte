@@ -1,5 +1,5 @@
 <script lang="ts"></script>
 
-<div class="">
+<div class="pb-8">
   <slot />
 </div>

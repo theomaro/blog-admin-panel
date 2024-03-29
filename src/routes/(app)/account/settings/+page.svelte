@@ -37,10 +37,21 @@
 
   let checkUsername: string;
 
+  $: disableUsername = username == data.currentUser.username ? false : true;
   $: disableDelete =
-    username && password && verify.includes("delete my account") ? false : true;
-  $: disableUsername = username ? false : true;
-  $: disablePassword = username ? false : true;
+    username == data.currentUser.username &&
+    verify.includes("delete my account") &&
+    password.length >= 8
+      ? false
+      : true;
+
+  $: disablePassword =
+    oldPassword.length >= 8 &&
+    newPassword.length >= 8 &&
+    oldPassword !== newPassword &&
+    confirmedNewPassword === newPassword
+      ? false
+      : true;
 </script>
 
 <svelte:head>
@@ -57,7 +68,7 @@
 
 <Header title="Manage Account" icon="ri-settings-3-line" />
 
-<div class="md:max-w-md lg:max-w-2xl">
+<div class="md:max-w-md lg:max-w-2xl py-8">
   <div class="space-y-12">
     <article class="space-y-2">
       <h3 class="text-xl text-gray-700 font-semibold">Username</h3>
@@ -129,8 +140,8 @@
 
       <div class="border-l-4 ps-3 space-y-2">
         <p class="text-sm">
-          Once you delete your account, there is no going back. Please be
-          certain.
+          Protect your account with a strong and unique password. We recommend
+          changing your password regularly.
         </p>
 
         <button
@@ -199,6 +210,7 @@
 
             <div class="flex items-center gap-x-4">
               <button
+                disabled={disablePassword}
                 type="submit"
                 class="bg-gray-100 border border-gray-300 bg-opacity-95 text-black rounded-lg text-sm py-1 px-4 text-center font-semibold"
                 >Update password</button

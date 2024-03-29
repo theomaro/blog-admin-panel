@@ -34,39 +34,38 @@ export const actions: Actions = {
       return {
         results: {
           username,
-          password,
         },
         errors: {
           username: errors.username?._errors[0],
           password: errors.password?._errors[0],
         },
       };
-    } else {
-      // send data to an api endpoint
-      const res = await fetch("http://localhost:3000/api/auth/signin", {
-        method: "POST",
-        body: JSON.stringify(validator.data),
-        headers: { "content-type": "application/json" },
-      }).then((results) => results.json());
-
-      if (!res.success)
-        return {
-          results: {
-            username,
-            password,
-          },
-          errors: { message: res.message },
-        };
-
-      cookies.set("session", res.token, {
-        path: "/",
-        httpOnly: true,
-        sameSite: "strict",
-        secure: true,
-        maxAge: res.expiresIn * 24 * 60 * 60,
-      });
-
-      throw redirect(303, "/");
     }
+
+    // send data to an api endpoint
+    const res = await fetch("http://localhost:3000/api/auth/signin", {
+      method: "POST",
+      body: JSON.stringify(validator.data),
+      headers: { "content-type": "application/json" },
+    }).then((results) => results.json());
+
+    if (!res.success)
+      return {
+        results: {
+          username: validator.data.username,
+        },
+        errors: { message: res.message },
+      };
+
+    cookies.set("session", res.token, {
+      path: "/",
+      httpOnly: true,
+      sameSite: "strict",
+      secure: true,
+      maxAge: res.expiresIn * 24 * 60 * 60,
+    });
+
+    throw redirect(303, "/");
   },
 };
+// Jos2018(Mat
