@@ -1,6 +1,7 @@
 import { redirect, type Actions } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import { z } from "zod";
+import { API_URL } from "$env/static/private";
 
 const deleteSchema = z.object({
   username: z
@@ -90,7 +91,7 @@ export const actions: Actions = {
     }
 
     // send data to the server to delete a user
-    const res = await fetch("http://localhost:3000/api/users", {
+    const res = await fetch(`${API_URL}/users`, {
       method: "DELETE",
       body: JSON.stringify({
         token: cookies.get("session"),
@@ -139,7 +140,7 @@ export const actions: Actions = {
       };
 
     // send data to the server to update a username
-    const res = await fetch("http://localhost:3000/api/users/change-username", {
+    const res = await fetch(`${API_URL}/users/change-username`, {
       method: "PUT",
       body: JSON.stringify({ token: cookies.get("session"), username }),
       headers: {
@@ -183,7 +184,7 @@ export const actions: Actions = {
     }
 
     // send data to the server to update a username
-    const res = await fetch("http://localhost:3000/api/users/change-password", {
+    const res = await fetch(`${API_URL}/users/change-password`, {
       method: "PUT",
       body: JSON.stringify({
         token: cookies.get("session"),

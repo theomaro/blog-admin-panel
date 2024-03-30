@@ -1,6 +1,7 @@
 import { redirect, type Actions } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import { z } from "zod";
+import { API_URL } from "$env/static/private";
 
 const profileSchema = z.object({
   full_name: z.string().trim(),
@@ -64,23 +65,23 @@ export const actions: Actions = {
             errors.location?._errors[0],
         },
       };
-    } else {
-      // send data to an api endpoint
-      const res = await fetch("http://localhost:3000/api/users/update", {
-        method: "PUT",
-        body: JSON.stringify({
-          token: cookies.get("session"),
-          user: validator.data,
-        }),
-        headers: { "content-type": "application/json" },
-      }).then((res) => res.json());
-
-      if (!res.success)
-        return {
-          errors: { message: res.message },
-        };
-
-      throw redirect(303, "/account/profile");
     }
+
+    // send data to an api endpoint
+    const res = await fetch(`${API_URL}/users/update`, {
+      method: "PUT",
+      body: JSON.stringify({
+        token: cookies.get("session"),
+        user: validator.data,
+      }),
+      headers: { "content-type": "application/json" },
+    }).then((res) => res.json());
+
+    if (!res.success)
+      return {
+        errors: { message: res.message },
+      };
+
+    throw redirect(303, "/account/profile");
   },
 };

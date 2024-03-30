@@ -1,6 +1,7 @@
 import z from "zod";
 import type { Actions } from "./$types";
 import { redirect } from "@sveltejs/kit";
+import { API_URL } from "$env/static/private";
 
 const signUpSchema = z.object({
   email: z
@@ -63,7 +64,7 @@ export const actions: Actions = {
       };
     } else {
       // send data to an api endpoint
-      const res = await fetch("http://localhost:3000/api/auth/signup", {
+      const res = await fetch(`${API_URL}/auth/signup`, {
         method: "POST",
         body: JSON.stringify(validator.data),
         headers: { "content-type": "application/json" },

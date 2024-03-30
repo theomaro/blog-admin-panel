@@ -1,4 +1,5 @@
 import { type Handle } from "@sveltejs/kit";
+import { API_URL } from "$env/static/private";
 
 export const handle: Handle = async ({ event, resolve }) => {
   const unProtectedRoutes = ["/signin", "/signup"];
@@ -14,7 +15,7 @@ export const handle: Handle = async ({ event, resolve }) => {
   // check if token is valid and give access to a only that user
   // get user data from database
   const res = await event
-    .fetch("http://localhost:3000/api/users", {
+    .fetch(`${API_URL}/users`, {
       method: "POST",
       body: JSON.stringify({
         token: session,

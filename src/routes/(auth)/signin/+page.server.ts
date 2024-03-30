@@ -1,5 +1,6 @@
 import z from "zod";
 import { redirect, type Actions } from "@sveltejs/kit";
+import { API_URL } from "$env/static/private";
 
 const signInSchema = z.object({
   username: z
@@ -43,7 +44,7 @@ export const actions: Actions = {
     }
 
     // send data to an api endpoint
-    const res = await fetch("http://localhost:3000/api/auth/signin", {
+    const res = await fetch(`${API_URL}/auth/signin`, {
       method: "POST",
       body: JSON.stringify(validator.data),
       headers: { "content-type": "application/json" },
@@ -68,4 +69,3 @@ export const actions: Actions = {
     throw redirect(303, "/");
   },
 };
-// Jos2018(Mat
