@@ -35,7 +35,7 @@
     </button>
 
     <ul
-      class="hidden group-[.show]:block absolute z-50 top-14 w-32 bg-white rounded-lg shadow-lg py-2"
+      class="hidden group-[.show]:block absolute z-10 top-14 w-32 bg-white rounded-lg shadow-lg py-2"
     >
       <li>
         <button
@@ -51,13 +51,12 @@
           >My account</button
         >
       </li>
-      <li>
+      <form method="post" action="/?/signout">
         <button
-          formaction="/?/signout"
           class="w-full text-start px-4 py-2 hover:bg-primary-600 hover:text-white"
           type="submit">Sign Out</button
         >
-      </li>
+      </form>
     </ul>
   </div>
 

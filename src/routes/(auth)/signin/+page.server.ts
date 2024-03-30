@@ -63,7 +63,7 @@ export const actions: Actions = {
       httpOnly: true,
       sameSite: "strict",
       secure: true,
-      maxAge: res.expiresIn * 24 * 60 * 60,
+      maxAge: res.expiresIn,
     });
 
     throw redirect(303, "/");
