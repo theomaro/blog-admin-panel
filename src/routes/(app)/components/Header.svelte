@@ -5,15 +5,16 @@
 
   let showContainer: HTMLDivElement;
 
-  const handleProfile = (url: string = "") => {
-    if (url) goto(url);
-    showContainer?.classList.toggle("show");
-  };
+  const showProfileMenu = () => showContainer?.classList.toggle("show");
+  const hideProfileMenu = () => showContainer?.classList.remove("show");
 </script>
+
+<svelte:window on:click={hideProfileMenu} />
 
 <header class="w-full py-1 flex items-center justify-between">
   <div class="flex items-center justify-between">
     <button
+      on:click={() => goto("/")}
       class="font-display font-bold text-2xl lg:text-3xl hover:text-gray-700"
     >
       <i class="ri ri-menu-line"></i>
@@ -23,11 +24,11 @@
 
   <div
     bind:this={showContainer}
-    class="flex justify-end group {user ? 'flex' : 'hidden'}"
+    class="show-container flex justify-end group {user ? 'flex' : 'hidden'}"
   >
     <button
       type="button"
-      on:click={() => handleProfile()}
+      on:click|stopPropagation={showProfileMenu}
       class="w-10 h-10 rounded-full overflow-hidden border-4 border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none"
     >
       <img src={user?.avatar_url || profileImage} alt="" />
@@ -38,14 +39,14 @@
     >
       <li>
         <button
-          on:click={() => handleProfile("/account/profile")}
+          on:click={() => goto("/account/profile")}
           class="w-full text-start px-4 py-2 hover:bg-primary-600 hover:text-white"
           >Profile</button
         >
       </li>
       <li>
         <button
-          on:click={() => handleProfile("/account/settings")}
+          on:click={() => goto("/account/settings")}
           class="w-full text-start px-4 py-2 hover:bg-primary-600 hover:text-white"
           >My account</button
         >
@@ -56,9 +57,7 @@
           action="/?/signout"
           class="block px-4 py-2 hover:bg-primary-600 hover:text-white"
         >
-          <button on:click={() => handleProfile()} type="submit"
-            >Sign Out</button
-          >
+          <button type="submit">Sign Out</button>
         </form>
       </li>
     </ul>

@@ -90,7 +90,7 @@
       type="date"
       id="birth_date"
       name="birth_date"
-      value={user?.birth_date?.slice(0, 10)}
+      value={user?.birth_date ? user?.birth_date?.slice(0, 10) : ""}
       class="rounded-lg text-xs sm:text-sm px-2 md:px-2.5 py-1 md:py-1.5 text-gray-700 bg-gray-50 bg-opacity-60"
     />
   </div>
