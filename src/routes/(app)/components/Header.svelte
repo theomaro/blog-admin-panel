@@ -24,7 +24,7 @@
 
   <div
     bind:this={showContainer}
-    class="show-container flex justify-end group {user ? 'flex' : 'hidden'}"
+    class="flex justify-end group {user ? 'flex' : 'hidden'}"
   >
     <button
       type="button"
@@ -35,7 +35,7 @@
     </button>
 
     <ul
-      class="hidden group-[.show]:block absolute top-14 w-32 bg-white rounded-lg shadow-lg py-2"
+      class="hidden group-[.show]:block absolute z-50 top-14 w-32 bg-white rounded-lg shadow-lg py-2"
     >
       <li>
         <button
@@ -52,13 +52,11 @@
         >
       </li>
       <li>
-        <form
-          method="post"
-          action="/?/signout"
-          class="block px-4 py-2 hover:bg-primary-600 hover:text-white"
+        <button
+          formaction="/?/signout"
+          class="w-full text-start px-4 py-2 hover:bg-primary-600 hover:text-white"
+          type="submit">Sign Out</button
         >
-          <button type="submit">Sign Out</button>
-        </form>
       </li>
     </ul>
   </div>
