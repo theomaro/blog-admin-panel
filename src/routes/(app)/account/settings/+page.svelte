@@ -35,11 +35,13 @@
     changePasswordModal.classList.toggle("hidden");
   };
 
-  let checkUsername: string;
+  $: disableUsername =
+    username.length > 3 && username !== data.currentUser.username
+      ? false
+      : true;
 
-  $: disableUsername = username == data.currentUser.username ? false : true;
   $: disableDelete =
-    username == data.currentUser.username &&
+    username === data.currentUser.username &&
     verify.includes("delete my account") &&
     password.length >= 8
       ? false
@@ -117,7 +119,7 @@
                   class="border border-gray-300 py-1 px-2.5 rounded-lg text-sm focus:border-blue-500"
                 />
                 <label for="change-uname" class="text-xs"
-                  >{checkUsername ?? "Choose a new username"}</label
+                  >"Choose a new username"</label
                 >
               </div>
 
