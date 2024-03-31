@@ -214,7 +214,7 @@
               <button
                 disabled={disablePassword}
                 type="submit"
-                class="bg-gray-100 border border-gray-300 bg-opacity-95 text-black rounded-lg text-sm py-1 px-4 text-center font-semibold"
+                class="bg-green-500 bg-opacity-95 text-white rounded-lg text-sm py-1 px-4 text-center disabled:bg-gray-300 disabled:text-black disabled:font-semibold"
                 >Update password</button
               >
 
