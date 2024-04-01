@@ -1,5 +1,6 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
+  import { page } from "$app/stores";
   import profileImage from "$lib/images/pavatar.jpg";
   export let user: App.User | null;
 
@@ -40,22 +41,21 @@
       <li>
         <button
           on:click={() => goto("/account/profile")}
-          class="w-full text-start px-4 py-2 hover:bg-primary-600 hover:text-white"
-          >Profile</button
+          class="item-link {$page.url.pathname === '/account/profile'
+            ? 'active-link'
+            : ''}">Profile</button
         >
       </li>
       <li>
         <button
           on:click={() => goto("/account/settings")}
-          class="w-full text-start px-4 py-2 hover:bg-primary-600 hover:text-white"
-          >My account</button
+          class="item-link {$page.url.pathname === '/account/settings'
+            ? 'active-link'
+            : ''}         ">My account</button
         >
       </li>
       <form method="post" action="/?/signout">
-        <button
-          class="w-full text-start px-4 py-2 hover:bg-primary-600 hover:text-white"
-          type="submit">Sign Out</button
-        >
+        <button class="item-link" type="submit">Sign Out</button>
       </form>
     </ul>
   </div>
@@ -65,3 +65,13 @@
     <button class="py-2 px-5">Sign In</button>
   </div>
 </header>
+
+<style lang="postcss">
+  .active-link {
+    @apply bg-primary-500 text-white;
+  }
+
+  .item-link {
+    @apply w-full text-start px-4 py-2 hover:bg-primary-600 hover:text-white;
+  }
+</style>
