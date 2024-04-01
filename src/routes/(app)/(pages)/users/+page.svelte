@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Paginator from "./../components/Paginator.svelte";
   import SearchFilter from "../components/SearchFilter.svelte";
   import UserTable from "../components/UserTable.svelte";
   import type { PageData } from "./$types";
@@ -23,5 +24,5 @@
     <UserTable users={data.users} />
   </div>
 
-  <!-- Pagination -->
+  <Paginator />
 </div>
