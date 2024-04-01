@@ -1,4 +1,5 @@
 <script lang="ts">
+  import SearchFilter from "../components/SearchFilter.svelte";
   import UserTable from "../components/UserTable.svelte";
   import type { PageData } from "./$types";
 
@@ -15,7 +16,7 @@
       <i class="fas fa-list mr-3 text-primary-800"></i> Latest Users
     </h2>
 
-    <!-- search filter -->
+    <div class="md:basis-1/2 lg:basis-1/3"><SearchFilter /></div>
   </div>
 
   <div class="bg-white overflow-auto mt-8">
