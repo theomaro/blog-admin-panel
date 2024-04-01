@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ErrorFloated from "../../../(auth)/components/ErrorFloated.svelte";
   import FormUpdate from "../components/FormUpdate.svelte";
   import Header from "../components/Header.svelte";
 
@@ -16,11 +17,7 @@
 </svelte:head>
 
 {#if errors?.message}
-  <div
-    class="absolute top-1 right-1 bg-orange-200 text-cyan-900 bg-opacity-50 shadow-md rounded px-4 py-1.5 w-1/2 text-sm"
-  >
-    <p>{errors?.message}</p>
-  </div>
+  <ErrorFloated message={errors.message} />
 {/if}
 
 <Header title="Public profile" icon="ri-user-line" />

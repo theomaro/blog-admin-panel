@@ -6,6 +6,7 @@
   import FormHeader from "../components/Header.svelte";
   import Input from "../components/Input.svelte";
   import Error from "../components/Error.svelte";
+  import ErrorFloated from "../components/ErrorFloated.svelte";
 
   export let form;
 
@@ -17,13 +18,9 @@
   <title>Sign In | Blog</title>
 </svelte:head>
 
-<div
-  class="{errors?.message
-    ? ''
-    : 'hidden'} absolute top-1 right-1 bg-orange-200 text-cyan-900 bg-opacity-50 shadow-md rounded px-4 py-1.5 w-1/2 text-sm"
->
-  <p>{errors?.message}</p>
-</div>
+{#if errors?.message}
+  <ErrorFloated message={errors.message} />
+{/if}
 
 <FormHeader text="Sign in to your account" />
 

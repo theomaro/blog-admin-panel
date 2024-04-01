@@ -16,6 +16,12 @@ A fully-functional blogging website having an admin panel and a blog portal powe
 npm install
 ```
 
+- Set development enviroment variables
+
+```
+$ touch .env && echo PUBLIC_API_URL=http://localhost:3000/api
+```
+
 - Run development server
 
 ```npm

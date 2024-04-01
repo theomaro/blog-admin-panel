@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ErrorFloated from "../../../(auth)/components/ErrorFloated.svelte";
   import Header from "../components/Header.svelte";
 
   import type { ActionData, PageData } from "./$types";
@@ -60,13 +61,9 @@
   <title>Account settings</title>
 </svelte:head>
 
-<div
-  class="{errors?.message
-    ? ''
-    : 'hidden'} absolute top-1 right-1 bg-orange-200 text-cyan-900 bg-opacity-50 shadow-md rounded px-4 py-1.5 w-1/2 text-sm"
->
-  <p>{errors?.message}</p>
-</div>
+{#if errors?.message}
+  <ErrorFloated message={errors.message} />
+{/if}
 
 <Header title="Manage Account" icon="ri-settings-3-line" />
 
