@@ -37,4 +37,10 @@ Technologies used: JavaScript, Bootstrap, SQL, PHP.
 
 ## Working Model
 
-Selected Snapshots of Portal:
+- **Selected Snapshots of Admin Portal:**
+
+| Feature             | Preview                                             | Preview                                                  |
+| ------------------- | --------------------------------------------------- | -------------------------------------------------------- |
+| User Authentication | ![login](./login.png) **Login**                     | ![Register](./register.png) **Register**                 |
+| User Account        | ![Public Profile](./profile.png) **Public Profile** | ![Account Settings](./settings.png) **Account Settings** |
+| Dashboard           | ![](./users.png) **Get All Users**                  |
