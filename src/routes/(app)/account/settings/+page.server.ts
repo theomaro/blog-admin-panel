@@ -91,7 +91,7 @@ export const actions: Actions = {
     }
 
     // send data to the server to delete a user
-    const res = await fetch(`${API_URL}/users`, {
+    const res = await fetch(`${API_URL}/profile`, {
       method: "DELETE",
       body: JSON.stringify({
         token: cookies.get("session"),
@@ -140,7 +140,7 @@ export const actions: Actions = {
       };
 
     // send data to the server to update a username
-    const res = await fetch(`${API_URL}/users/change-username`, {
+    const res = await fetch(`${API_URL}/profile/change-username`, {
       method: "PUT",
       body: JSON.stringify({ token: cookies.get("session"), username }),
       headers: {
@@ -184,7 +184,7 @@ export const actions: Actions = {
     }
 
     // send data to the server to update a username
-    const res = await fetch(`${API_URL}/users/change-password`, {
+    const res = await fetch(`${API_URL}/profile/change-password`, {
       method: "PUT",
       body: JSON.stringify({
         token: cookies.get("session"),

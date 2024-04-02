@@ -15,7 +15,7 @@ export const handle: Handle = async ({ event, resolve }) => {
   // check if token is valid and give access to a only that user
   // get user data from database
   const res = await event
-    .fetch(`${API_URL}/users`, {
+    .fetch(`${API_URL}/profile`, {
       method: "POST",
       body: JSON.stringify({
         token: session,

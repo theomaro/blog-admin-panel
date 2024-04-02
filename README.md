@@ -36,7 +36,7 @@ npm install
 - Set development enviroment variables
 
 ```
-$ touch .env && echo PUBLIC_API_URL=http://localhost:3000/api
+$ touch .env && echo API_URL=http://localhost:3000/api
 ```
 
 - Run development server

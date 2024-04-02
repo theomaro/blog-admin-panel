@@ -5,6 +5,7 @@
 
   interface User {
     id: string;
+    username: string;
     full_name: string | "";
     avatar_url: string | "";
     current_status: string;
@@ -42,7 +43,7 @@
           <td class="ps-3 py-1.5">
             <div class="flex flex-col items-start lg:flex-row lg:items-center">
               <a
-                href="users/{user.id}"
+                href="users/{user.username}"
                 class="flex-shrink-0 w-8 h-8 md:w-9 md:h-9"
               >
                 <img
@@ -95,8 +96,6 @@
             </p></td
           >
         </tr>
-      {:else}
-        <p class="font-semibold text-lg mt-12">Ooops! No users</p>
       {/each}
     </tbody>
   </table>

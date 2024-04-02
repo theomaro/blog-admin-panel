@@ -20,9 +20,13 @@
     <div class="md:basis-1/2 lg:basis-1/3"><SearchFilter /></div>
   </div>
 
-  <div class="bg-white overflow-auto mt-8">
-    <UserTable users={data.users} />
-  </div>
+  {#if data.totalCounts !== 0}
+    <div class="bg-white overflow-auto mt-8">
+      <UserTable users={data.users} />
+    </div>
 
-  <Paginator />
+    <Paginator />
+  {:else}
+    <p class="font-semibold text-lg mt-12">Ooops! No users</p>
+  {/if}
 </div>

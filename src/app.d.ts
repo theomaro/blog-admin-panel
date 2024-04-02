@@ -10,8 +10,6 @@ declare global {
     // interface Platform {}
 
     interface User {
-      isAuthenticated: boolean;
-      id: string;
       username: string;
       current_role: string;
       full_name: string | null;
@@ -23,8 +21,6 @@ declare global {
       location: string | null;
       avatar_url: string | null;
       current_status: string;
-      modified_at: string | null;
-      last_login_at: string | null;
     }
 
     interface FormData {

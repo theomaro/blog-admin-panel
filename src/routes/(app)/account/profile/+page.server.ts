@@ -68,7 +68,7 @@ export const actions: Actions = {
     }
 
     // send data to an api endpoint
-    const res = await fetch(`${API_URL}/users/update`, {
+    const res = await fetch(`${API_URL}/profile`, {
       method: "PUT",
       body: JSON.stringify({
         token: cookies.get("session"),
