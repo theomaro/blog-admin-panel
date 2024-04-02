@@ -1,6 +1,6 @@
 <script lang="ts">
   import ErrorFloated from "../../../(auth)/components/ErrorFloated.svelte";
-  import Header from "../components/Header.svelte";
+  import UserProfileHeader from "../../components/UserProfileHeader.svelte";
 
   import type { ActionData, PageData } from "./$types";
   export let data: PageData;
@@ -65,7 +65,7 @@
   <ErrorFloated message={errors.message} />
 {/if}
 
-<Header title="Manage Account" icon="ri-settings-3-line" />
+<UserProfileHeader title="Manage Account" icon="ri-settings-3-line" />
 
 <div class="md:max-w-md lg:max-w-2xl py-8">
   <div class="space-y-12">
