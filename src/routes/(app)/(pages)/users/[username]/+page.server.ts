@@ -7,12 +7,11 @@ export const load: PageServerLoad = async ({ params, cookies, parent }) => {
 
   const { username } = params;
 
-  // get user profile by username and id
+  // get user profile by username
   const res = await fetch(`${API_URL}/users/${username}`, {
     method: "POST",
     body: JSON.stringify({
       token: cookies.get("session"),
-      username,
     }),
     headers: { "content-type": "application/json" },
   }).then((res) => res.json());
