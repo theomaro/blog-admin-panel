@@ -63,22 +63,22 @@ export const actions: Actions = {
       };
     } else {
       // send data to an api endpoint
-      // const res = await fetch(`${API_URL}/auth/signup`, {
-      //   method: "POST",
-      //   body: JSON.stringify(validator.data),
-      //   headers: { "content-type": "application/json" },
-      // }).then((res) => res.json());
+      const res = await fetch(`${API_URL}/auth/signup`, {
+        method: "POST",
+        body: JSON.stringify(validator.data),
+        headers: { "content-type": "application/json" },
+      }).then((res) => res.json());
 
-      // if (!res.success)
-      //   return {
-      //     results: {
-      //       email,
-      //       username,
-      //       password,
-      //       confirmed_password,
-      //     },
-      //     errors: { message: res.message },
-      //   };
+      if (!res.success)
+        return {
+          results: {
+            email,
+            username,
+            password,
+            confirmed_password,
+          },
+          errors: { message: res.message },
+        };
 
       throw redirect(303, "/signin");
     }
