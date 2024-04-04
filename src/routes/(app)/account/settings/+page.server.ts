@@ -3,34 +3,37 @@ import type { PageServerLoad } from "./$types";
 import { z } from "zod";
 import { API_URL } from "$env/static/private";
 
-const deleteSchema = z.object({
+const unameSchema = z.object({
   username: z
     .string({ required_error: "Username field is required" })
+    .trim()
     .min(5, { message: "Username must be at least 5 character long" })
     .max(30, { message: "Username must be less than 30 character" })
-    .trim(),
+    .refine((data: string) => !/\s/.test(data), {
+      message: "Username can not contain whitespace",
+    }),
+});
+
+const passSchema = z
+  .string({ required_error: "Old password is required" })
+  .min(8, { message: "Password must be at least 8 character long" })
+  .trim();
+
+const deleteSchema = z.object({
+  username: unameSchema,
   verify: z
     .string({ required_error: "Verify field is required" })
     .trim()
     .includes("delete my account", {
       message: "must contain on `delete my account`",
     }),
-  password: z
-    .string({ required_error: "Password field is required" })
-    .min(8, { message: "Password must be at least 8 character long" })
-    .trim(),
+  password: passSchema,
 });
 
 const passwordSchema = z
   .object({
-    oldPassword: z
-      .string({ required_error: "Old password is required" })
-      .min(8, { message: "Password must be at least 8 character long" })
-      .trim(),
-    newPassword: z
-      .string({ required_error: "New password is required" })
-      .min(8, { message: "Password must be at least 8 character long" })
-      .trim(),
+    oldPassword: passSchema,
+    newPassword: passSchema,
     confirmedNewPassword: z
       .string({ required_error: "You must confirm your new password" })
       .trim(),
@@ -119,15 +122,7 @@ export const actions: Actions = {
     const username = formData.get("username") ?? "";
 
     // validate user input
-    const isUsernameValid = await z
-      .object({
-        username: z
-          .string({ required_error: "Username field is required" })
-          .min(5, { message: "Username must be at least 5 character long" })
-          .max(30, { message: "Username must be less than 30 character" })
-          .trim(),
-      })
-      .safeParseAsync({ username });
+    const isUsernameValid = await unameSchema.safeParseAsync({ username });
 
     if (!isUsernameValid.success)
       return {

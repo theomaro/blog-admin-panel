@@ -13,13 +13,13 @@ const profileSchema = z.object({
     .trim()
     .email({ message: "Email must be a valid email address" }),
   avatar_url: z.string().trim(),
-  biography: z.string().trim(),
+  biography: z
+    .string()
+    .trim()
+    .min(10, { message: "Biography must be at least 10 character long" })
+    .max(80, { message: "Biography must be less than 80 character" }),
   location: z.string().trim(),
 });
-
-// .length(10, { message: "phone must be 10 character" })
-// .min(10, { message: "Biography must be at least 10 character long" })
-//     .max(80, { message: "Biography must be less than 80 character" }),
 
 export const load: PageServerLoad = async ({ parent }) => {
   await parent();
