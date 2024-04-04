@@ -2,9 +2,10 @@
   import profileImage from "$lib/images/pavatar.jpg";
 
   export let user: App.User | null;
+  export let pathToAction: string;
 </script>
 
-<form method="post" action="?/updateProfile" class="flex flex-col relative">
+<form method="post" action={pathToAction} class="flex flex-col relative">
   <div
     class="flex flex-col gap-1 md:absolute md:top-6 md:-right-52 lg:-right-64"
   >

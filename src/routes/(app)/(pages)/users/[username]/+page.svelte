@@ -9,5 +9,5 @@
 <UserProfileHeader title="Personal profile" icon="ri-user-line" />
 
 <div class="w-full md:max-w-md lg:max-w-lg py-8">
-  <UserProfileForm user={data.user} />
+  <UserProfileForm pathToAction="?/updateUser" user={data.user} />
 </div>

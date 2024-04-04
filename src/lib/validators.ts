@@ -108,10 +108,6 @@ export const profileSchema = z.object({
     .trim()
     .email({ message: "Email must be a valid email address" }),
   avatar_url: z.string().trim(),
-  biography: z
-    .string()
-    .trim()
-    .min(10, { message: "Biography must be at least 10 character long" })
-    .max(80, { message: "Biography must be less than 80 character" }),
+  biography: z.string().trim(),
   location: z.string().trim(),
 });

@@ -23,5 +23,5 @@
 <UserProfileHeader title="Public profile" icon="ri-user-line" />
 
 <div class="w-full md:max-w-md lg:max-w-lg py-8">
-  <UserProfileForm {user} />
+  <UserProfileForm pathToAction="?/updateProfile" {user} />
 </div>
