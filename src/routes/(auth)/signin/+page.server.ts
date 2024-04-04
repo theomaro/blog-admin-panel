@@ -44,7 +44,7 @@ export const actions: Actions = {
     }
 
     // send data to an api endpoint
-    const res = await fetch(`${API_URL}/auth/signin`, {
+    const res: any = await fetch(`${API_URL}/auth/signin`, {
       method: "POST",
       body: JSON.stringify(validator.data),
       headers: { "content-type": "application/json" },

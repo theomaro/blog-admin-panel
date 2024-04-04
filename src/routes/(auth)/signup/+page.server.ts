@@ -63,7 +63,7 @@ export const actions: Actions = {
       };
     } else {
       // send data to an api endpoint
-      const res = await fetch(`${API_URL}/auth/signup`, {
+      const res: any = await fetch(`${API_URL}/auth/signup`, {
         method: "POST",
         body: JSON.stringify(validator.data),
         headers: { "content-type": "application/json" },
@@ -74,8 +74,6 @@ export const actions: Actions = {
           results: {
             email,
             username,
-            password,
-            confirmed_password,
           },
           errors: { message: res.message },
         };

@@ -11,7 +11,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
   if (token && !unProtectedRoutes.includes(event.url.pathname)) {
     // get user data from database by valid token
-    const res = await event
+    const res: any = await event
       .fetch(`${API_URL}/profile`, {
         method: "POST",
         body: JSON.stringify({
@@ -20,6 +20,9 @@ export const handle: Handle = async ({ event, resolve }) => {
         headers: { "content-type": "application/json" },
       })
       .then((results) => results.json());
+    if (!res.success) {
+      return redirect("/signin", "No authenticated user.");
+    }
     event.locals.currentUser = { ...res.user, isAuthenticated: true };
   }
 
