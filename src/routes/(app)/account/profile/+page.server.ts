@@ -1,25 +1,7 @@
 import { redirect, type Actions } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
-import { z } from "zod";
 import { API_URL } from "$env/static/private";
-
-const profileSchema = z.object({
-  full_name: z.string().trim(),
-  sex: z.string().trim(),
-  birth_date: z.string().trim(),
-  phone: z.string().trim(),
-  email: z
-    .string({ required_error: "Email field is required" })
-    .trim()
-    .email({ message: "Email must be a valid email address" }),
-  avatar_url: z.string().trim(),
-  biography: z
-    .string()
-    .trim()
-    .min(10, { message: "Biography must be at least 10 character long" })
-    .max(80, { message: "Biography must be less than 80 character" }),
-  location: z.string().trim(),
-});
+import { profileSchema } from "$lib/validators";
 
 export const load: PageServerLoad = async ({ parent }) => {
   await parent();

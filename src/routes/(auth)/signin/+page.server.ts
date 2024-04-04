@@ -1,54 +1,6 @@
-import z from "zod";
 import { redirect, type Actions } from "@sveltejs/kit";
 import { API_URL } from "$env/static/private";
-
-const signInSchema = z.object({
-  username: z
-    .string({ required_error: "Username field is required" })
-    .trim()
-    .min(5, { message: "Username must be at least 5 character long" })
-    .max(30, { message: "Username must be less than 30 character" })
-    .refine((data: string) => !/\s/.test(data), {
-      message: "Username can not contain whitespace",
-    }),
-
-  password: z
-    .string({ required_error: "Password field is required" })
-    .trim()
-    .min(8, { message: "Password must be at least 8 character long" })
-    .refine((data: string) => !/\s/.test(data), {
-      message: "Password can not contain whitespace",
-    })
-    .superRefine((data: string, ctx: z.RefinementCtx) => {
-      if (data.search("(?=.*([A-Z]){1,})")) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Must have at least one uppercase",
-        });
-      }
-
-      if (data.search("(?=.*[a-z]{1,})")) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Must have at least one lowercase",
-        });
-      }
-
-      if (data.search("(?=.*[)(!@#$&*]{1,})")) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Must have at least one special character",
-        });
-      }
-
-      if (data.search("(?=.*[0-9]{1,})")) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Must have at least one number",
-        });
-      }
-    }),
-});
+import { signInSchema } from "$lib/validators";
 
 export const actions: Actions = {
   signin: async ({ fetch, request, cookies }) => {

@@ -2,53 +2,11 @@ import { redirect, type Actions } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import { z } from "zod";
 import { API_URL } from "$env/static/private";
-
-const unameSchema = z.object({
-  username: z
-    .string({ required_error: "Username field is required" })
-    .trim()
-    .min(5, { message: "Username must be at least 5 character long" })
-    .max(30, { message: "Username must be less than 30 character" })
-    .refine((data: string) => !/\s/.test(data), {
-      message: "Username can not contain whitespace",
-    }),
-});
-
-const passSchema = z
-  .string({ required_error: "Old password is required" })
-  .min(8, { message: "Password must be at least 8 character long" })
-  .trim();
-
-const deleteSchema = z.object({
-  username: unameSchema,
-  verify: z
-    .string({ required_error: "Verify field is required" })
-    .trim()
-    .includes("delete my account", {
-      message: "must contain on `delete my account`",
-    }),
-  password: passSchema,
-});
-
-const passwordSchema = z
-  .object({
-    oldPassword: passSchema,
-    newPassword: passSchema,
-    confirmedNewPassword: z
-      .string({ required_error: "You must confirm your new password" })
-      .trim(),
-  })
-  .refine(async (values) => values.oldPassword !== values.newPassword, {
-    message: "New password must be different",
-    path: ["newPassword"],
-  })
-  .refine(
-    async (values) => values.newPassword === values.confirmedNewPassword,
-    {
-      message: "New password must match",
-      path: ["confirmedNewPassword"],
-    }
-  );
+import {
+  changePasswordSchema,
+  deleteUserSchema,
+  usernameSchema,
+} from "$lib/validators";
 
 export const load: PageServerLoad = async ({ parent }) => {
   await parent();
@@ -69,7 +27,7 @@ export const actions: Actions = {
     const password: FormDataEntryValue = formData.get("password") ?? "";
 
     // validate form input
-    const validator = await deleteSchema.safeParseAsync({
+    const validator = await deleteUserSchema.safeParseAsync({
       username,
       verify,
       password,
@@ -122,7 +80,7 @@ export const actions: Actions = {
     const username = formData.get("username") ?? "";
 
     // validate user input
-    const isUsernameValid = await unameSchema.safeParseAsync({ username });
+    const isUsernameValid = await usernameSchema.safeParseAsync({ username });
 
     if (!isUsernameValid.success)
       return {
@@ -159,7 +117,7 @@ export const actions: Actions = {
     const confirmedNewPassword = formData.get("confirmed-new-password") ?? "";
 
     // validate user input
-    const validator = await passwordSchema.safeParseAsync({
+    const validator = await changePasswordSchema.safeParseAsync({
       oldPassword,
       newPassword,
       confirmedNewPassword,
