@@ -9,7 +9,7 @@ declare global {
     // interface PageData {}
     // interface Platform {}
 
-    interface User {
+    interface UserDetails {
       username: string;
       current_role: string;
       full_name: string | null;
@@ -21,19 +21,7 @@ declare global {
       location: string | null;
       avatar_url: string | null;
       current_status: string;
-    }
-
-    interface FormData {
-      success: boolean;
-      message: string;
-      data: RegisterData;
-    }
-
-    interface RegisterData {
-      email: FormDataEntryValue;
-      username: FormDataEntryValue;
-      password: FormDataEntryValue;
-      confirm_password: FormDataEntryValue;
+      last_login_at: string | "";
     }
   }
 }

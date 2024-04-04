@@ -1,6 +1,7 @@
 import { API_URL } from "$env/static/private";
 import { fail } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
+import type { User } from "$lib/app";
 
 export const load: PageServerLoad = async ({ fetch, url, cookies, parent }) => {
   await parent();
@@ -8,7 +9,12 @@ export const load: PageServerLoad = async ({ fetch, url, cookies, parent }) => {
   const limit = url.searchParams.get("limit") ?? "";
   const page = url.searchParams.get("page") ?? "";
 
-  const res = await fetch(`${API_URL}/users`, {
+  const res: {
+    message: string;
+    success: boolean;
+    totalCounts: number;
+    users: User[];
+  } = await fetch(`${API_URL}/users`, {
     method: "POST",
     body: JSON.stringify({
       token: cookies.get("session"),

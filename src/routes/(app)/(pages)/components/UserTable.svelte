@@ -4,7 +4,6 @@
   export let users: User[];
 
   interface User {
-    id: string;
     username: string;
     full_name: string | "";
     avatar_url: string | "";
