@@ -5,6 +5,6 @@
 
 <label
   for={forId}
-  class="block mb-2.5 capitalize text-sm font-medium text-gray-900"
+  class="block mb-2 capitalize text-sm font-medium text-gray-900"
   >{text}</label
 >

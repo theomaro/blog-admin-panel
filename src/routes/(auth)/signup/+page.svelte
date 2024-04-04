@@ -18,16 +18,14 @@
   <title>Sign Up | Blog</title>
 </svelte:head>
 
-{#if errors?.message}
-  <ErrorFloated message={errors.message} />
-{/if}
+<ErrorFloated message={errors?.message} />
 
 <Header text="Create your new account" />
 
 <form
   method="post"
   action="?/signup"
-  class="space-y-4 md:space-y-5 2xl:space-y-6"
+  class="space-y-4 md:space-y-5 2xl:space-y-6 mt-8"
 >
   <div>
     <Label forId="email" text="your email" />

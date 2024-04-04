@@ -61,9 +61,7 @@
   <title>Account settings</title>
 </svelte:head>
 
-{#if errors?.message}
-  <ErrorFloated message={errors.message} />
-{/if}
+<ErrorFloated message={errors?.message} />
 
 <UserProfileHeader title="Manage Account" icon="ri-settings-3-line" />
 

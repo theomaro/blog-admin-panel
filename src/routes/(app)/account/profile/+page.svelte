@@ -16,9 +16,7 @@
   <title>Your profile</title>
 </svelte:head>
 
-{#if errors?.message}
-  <ErrorFloated message={errors.message} />
-{/if}
+<ErrorFloated message={errors?.message} />
 
 <UserProfileHeader title="Public profile" icon="ri-user-line" />
 

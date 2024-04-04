@@ -60,7 +60,6 @@ export const actions: Actions = {
         },
       };
     }
-    console.log(validator.data);
 
     // send data to an api endpoint
     const res = await fetch(`${API_URL}/profile`, {

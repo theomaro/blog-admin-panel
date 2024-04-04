@@ -18,16 +18,14 @@
   <title>Sign In | Blog</title>
 </svelte:head>
 
-{#if errors?.message}
-  <ErrorFloated message={errors.message} />
-{/if}
+<ErrorFloated message={errors?.message} />
 
 <FormHeader text="Sign in to your account" />
 
 <form
   method="post"
   action="?/signin"
-  class="space-y-4 md:space-y-5 2xl:space-y-6"
+  class="space-y-4 md:space-y-5 2xl:space-y-6 mt-8"
 >
   <div>
     <Label forId="username" text="your username" />

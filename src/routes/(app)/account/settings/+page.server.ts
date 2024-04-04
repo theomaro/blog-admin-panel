@@ -1,6 +1,5 @@
 import { redirect, type Actions } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
-import { z } from "zod";
 import { API_URL } from "$env/static/private";
 import {
   changePasswordSchema,
@@ -80,7 +79,7 @@ export const actions: Actions = {
     const username = formData.get("username") ?? "";
 
     // validate user input
-    const isUsernameValid = await usernameSchema.safeParseAsync({ username });
+    const isUsernameValid = await usernameSchema.safeParseAsync(username);
 
     if (!isUsernameValid.success)
       return {
@@ -88,7 +87,7 @@ export const actions: Actions = {
           username,
         },
         errors: {
-          message: isUsernameValid.error.format().username?._errors[0],
+          message: isUsernameValid.error.format()._errors[0],
         },
       };
 
