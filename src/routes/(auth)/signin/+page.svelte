@@ -22,11 +22,7 @@
 
 <FormHeader text="Sign in to your account" />
 
-<form
-  method="post"
-  action="?/signin"
-  class="space-y-4 md:space-y-5 2xl:space-y-6 mt-8"
->
+<form method="post" action="" class="space-y-4 md:space-y-5 2xl:space-y-6 mt-8">
   <div>
     <Label forId="username" text="your username" />
     <Input

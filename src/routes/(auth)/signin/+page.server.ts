@@ -3,7 +3,7 @@ import { API_URL } from "$env/static/private";
 import { signInSchema } from "$lib/validators";
 
 export const actions: Actions = {
-  signin: async ({ fetch, request, cookies }) => {
+  default: async ({ fetch, request, cookies, url }) => {
     // read the form data sent by the browser
     const formData = await request.formData();
 
@@ -52,6 +52,11 @@ export const actions: Actions = {
       maxAge: res.expiresIn,
     });
 
-    throw redirect(303, "/");
+    // redirect the user back to the last visited page
+    // otherwise redirect to default page
+    const redirectTo = url.searchParams.get("redirectTo");
+    if (redirectTo) throw redirect(302, `/${redirectTo}`);
+
+    throw redirect(302, `/`);
   },
 };
