@@ -1,4 +1,4 @@
-import type { SearchStoreModel } from "$lib/app";
+import type { SearchStoreModel } from "$lib";
 import { writable } from "svelte/store";
 
 export const createSearchStore = <T extends Record<PropertyKey, any>>(

@@ -1,18 +1,8 @@
 <script lang="ts">
+  import type { User } from "$lib";
   import profileImage from "$lib/images/pavatar.jpg";
 
   export let users: User[];
-
-  interface User {
-    username: string;
-    full_name: string | "";
-    avatar_url: string | "";
-    current_status: string;
-    current_role: string;
-    email: string;
-    phone: string | "";
-    last_login_at: string | "";
-  }
 
   const getFormattedDate = (dateInput: string) => {
     return new Date(dateInput).toDateString().slice(4);

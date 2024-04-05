@@ -1,7 +1,8 @@
 <script lang="ts">
+  import type { UserDetails } from "$lib";
   import profileImage from "$lib/images/pavatar.jpg";
 
-  export let user: App.User | null;
+  export let user: UserDetails | null;
   export let pathToAction: string;
 </script>
 

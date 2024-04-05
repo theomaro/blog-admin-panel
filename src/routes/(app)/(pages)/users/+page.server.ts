@@ -1,25 +1,26 @@
 import { API_URL } from "$env/static/private";
-import { fail } from "@sveltejs/kit";
+import { error, fail } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
-import type { User } from "$lib/app";
+import type { User } from "$lib";
 
 export const load: PageServerLoad = async ({ fetch, url, cookies, parent }) => {
   await parent();
 
-  const limit = url.searchParams.get("limit") ?? "";
-  const page = url.searchParams.get("page") ?? "";
+  const limit = Number(url.searchParams.get("limit")) || 10;
+  const page = Number(url.searchParams.get("page")) || 1;
+
+  if (limit > 100) throw error(400, "Bad request");
 
   const res: {
     message: string;
     success: boolean;
     totalCounts: number;
+    totalRows: number;
     users: User[];
-  } = await fetch(`${API_URL}/users`, {
+  } = await fetch(`${API_URL}/users?limit=${limit}&page=${page}`, {
     method: "POST",
     body: JSON.stringify({
       token: cookies.get("session"),
-      limit: parseInt(limit) || 10,
-      page: parseInt(page) || 1,
     }),
     headers: { "content-type": "application/json" },
   }).then((res) => res.json());
@@ -29,5 +30,6 @@ export const load: PageServerLoad = async ({ fetch, url, cookies, parent }) => {
   return {
     users: res.users,
     totalCounts: res.totalCounts,
+    totalRows: res.totalRows,
   };
 };

@@ -3,7 +3,7 @@
   import SearchFilter from "../components/SearchFilter.svelte";
   import UserTable from "../components/UserTable.svelte";
   import type { PageData } from "./$types";
-  import type { SearchUser, User } from "$lib/app";
+  import type { SearchUser, User } from "$lib";
   import { createSearchStore, searchHandler } from "$lib/stores/searchStore";
   import { onDestroy } from "svelte";
 
