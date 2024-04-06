@@ -39,5 +39,11 @@ interface SearchUser {
 interface SearchStoreModel<T extends Record<PropertyKey, any>> {
   data: T[];
   filtered: T[];
-  search: string;
+  searchTerm: string;
+}
+
+interface PaginateStoreModel<T extends Record<PropertyKey, any>> {
+  data: T[];
+  totalItems: number;
+  totalRows: number;
 }

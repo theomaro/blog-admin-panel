@@ -3,3 +3,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.custom-select {
+  appearance: none !important;
+  background: none !important;
+  padding-inline-end: 0 !important;
+}

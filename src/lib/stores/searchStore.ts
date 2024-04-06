@@ -2,13 +2,15 @@ import type { SearchStoreModel } from "$lib";
 import { writable } from "svelte/store";
 
 export const createSearchStore = <T extends Record<PropertyKey, any>>(
-  data: T[]
+  searchableData: T[]
 ) => {
-  const { subscribe, set, update } = writable(<SearchStoreModel<T>>{
-    data: data,
-    filtered: data,
-    search: "",
-  });
+  const searchable = {
+    data: searchableData,
+    filtered: searchableData,
+    searchTerm: "",
+  };
+
+  const { subscribe, set, update } = writable(<SearchStoreModel<T>>searchable);
 
   return { subscribe, set, update };
 };
@@ -16,9 +18,9 @@ export const createSearchStore = <T extends Record<PropertyKey, any>>(
 export const searchHandler = <T extends Record<PropertyKey, any>>(
   store: SearchStoreModel<T>
 ) => {
-  const searchTerm = store.search.toLowerCase() || "";
+  const searchTerm = store.searchTerm.toLowerCase() || "";
 
-  store.filtered = store.data.filter((item: any) =>
+  store.filtered = store.data.filter((item: T) =>
     item.searchTerms.toLowerCase().includes(searchTerm)
   );
 };

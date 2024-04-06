@@ -1,28 +1,83 @@
-<section
-  class="flex flex-col gap-6 mt-4 md:pe-2 md:flex-row md:justify-between md:items-center md:mt-6"
->
-  <p class="text-sm">Page 1 of 11, showing 10 record(s) out of 101 total</p>
+<script lang="ts">
+  export let pageSize: number;
+  export let currentPage: number;
+  export let totalItems: number;
+  export let totalPages: number;
 
-  <article class="flex items-center">
-    <a
-      href="/users"
-      class="h-8 w-8 bg-primary-800 hover:bg-primary-600 font-semibold text-white text-sm flex items-center justify-center"
-      >1</a
+  const updatePageSize = (
+    event: Event & { currentTarget: EventTarget & HTMLSelectElement }
+  ) => {
+    pageSize = Number(event.currentTarget.value);
+    currentPage = 1;
+  };
+</script>
+
+<section
+  class="flex flex-col gap-y-6 lg:flex-row lg:justify-between lg:items-center"
+>
+  <div class="text-sm flex items-center gapx-x-2">
+    <p>Page {currentPage} of {totalPages},</p>
+
+    <div class="flex items-center gap-x-2">
+      <span>showing</span>
+      <select
+        on:select={updatePageSize}
+        bind:value={pageSize}
+        name="pageSize"
+        id="pageSize"
+        class="border border-gray-300 text-sm p-0 ps-2 pt-1 pb-0.5 w-10 cursor-pointer custom-select focus:ring-0 focus:border-primary-600"
+      >
+        <option value={10}>10</option>
+        <option value={25}>25</option>
+        <option value={50}>50</option>
+        <option value={100}>100</option>
+      </select>
+      <span>record(s) out of {totalItems} total</span>
+    </div>
+  </div>
+
+  <ul class="flex items-center">
+    <button
+      disabled={currentPage === 1}
+      on:click={() => (currentPage = currentPage > 1 ? currentPage - 1 : 1)}
+      class="page-item page-next-prev">Prev</button
     >
-    <a
-      href="/users"
-      class="h-8 w-8 font-semibold text-gray-800 hover:bg-primary-600 hover:text-white text-sm flex items-center justify-center"
-      >2</a
+
+    {#each Array(totalPages) as _, idx}
+      <li>
+        <button
+          on:click={() => (currentPage = idx + 1)}
+          class="page-item page-number {currentPage == idx + 1
+            ? 'active-page'
+            : ''}">{idx + 1}</button
+        >
+      </li>
+    {/each}
+
+    <button
+      on:click={() =>
+        (currentPage =
+          currentPage <= totalPages ? currentPage + 1 : totalPages)}
+      class="page-item page-next-prev"
+      disabled={currentPage === totalPages}>Next</button
     >
-    <a
-      href="/users"
-      class="h-8 w-8 font-semibold text-gray-800 hover:bg-primary-600 hover:text-white text-sm flex items-center justify-center"
-      >3</a
-    >
-    <a
-      href="/users"
-      class="h-8 w-8 font-semibold text-gray-800 hover:text-gray-900 text-sm flex items-center justify-center ml-3"
-      >Next <i class="ri-arrow-right-line ml-2 mb-1"></i></a
-    >
-  </article>
+  </ul>
 </section>
+
+<style lang="postcss">
+  .page-item {
+    @apply h-7 flex items-center justify-center font-semibold text-sm text-gray-600 border border-gray-200;
+  }
+
+  .page-number {
+    @apply w-7 hover:text-primary-600;
+  }
+
+  .page-next-prev {
+    @apply px-1.5 disabled:border-transparent;
+  }
+
+  .active-page {
+    @apply text-primary-700 border-primary-600;
+  }
+</style>

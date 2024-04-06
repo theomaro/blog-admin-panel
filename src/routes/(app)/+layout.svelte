@@ -18,7 +18,7 @@
     <div
       class="shadow-md basis-full border-t border-r rounded-tr-lg border-gray-200 overflow-y-auto"
     >
-      <div class="max-h-[89vh] 2xl:max-h-[93vh] pt-3 px-8">
+      <div class="max-h-[89vh] 2xl:max-h-[93vh] pt-3 px-3">
         <slot />
       </div>
     </div>

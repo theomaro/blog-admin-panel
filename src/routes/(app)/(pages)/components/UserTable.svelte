@@ -3,13 +3,15 @@
   import profileImage from "$lib/images/pavatar.jpg";
 
   export let users: User[];
+  export let pageSize: number = 10;
+  export let currentPage: number = 1;
 
   const getFormattedDate = (dateInput: string) => {
     return new Date(dateInput).toDateString().slice(4);
   };
 </script>
 
-<div class="overflow-auto">
+<div class="overflow-auto pb-2">
   <table class="min-w-full leading-normal">
     <thead
       class="bg-gray-800 text-white text-sm text-left font-semibold uppercase tracking-wider"
@@ -26,9 +28,9 @@
     </thead>
 
     <tbody class="text-gray-700 whitespace-no-wrap text-sm">
-      {#each users as user, i}
+      {#each users.slice(pageSize * (currentPage - 1), pageSize * currentPage) as user, idx}
         <tr class="even:bg-gray-100">
-          <td class="ps-3 py-1.5">{i + 1}</td>
+          <td class="ps-3 py-1.5">{pageSize * (currentPage - 1) + idx + 1}</td>
           <td class="ps-3 py-1.5">
             <div class="flex flex-col items-start lg:flex-row lg:items-center">
               <a
@@ -41,14 +43,16 @@
                   alt={user?.full_name ?? ""}
                 />
               </a>
-              <span class="lg:ml-3 font-semibold hidden lg:block"
+              <span
+                class="lg:ml-3 font-semibold hidden lg:block whitespace-nowrap"
                 >{user.full_name || ""}</span
               >
             </div>
           </td>
           <td class="ps-3 py-1.5">
-            <a class="hover:text-blue-600" href="mailto:{user.email}"
-              >{user.email}</a
+            <a
+              class="hover:text-blue-600 whitespace-nowrap"
+              href="mailto:{user.email}">{user.email}</a
             ></td
           >
           <td class="ps-3 py-1.5">
