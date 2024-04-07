@@ -39,7 +39,10 @@
     </h2>
 
     <div class="md:basis-1/2 lg:basis-1/3">
-      <SearchFilter bind:keyword={$searchStore.searchTerm} />
+      <SearchFilter
+        placeholderText="names, emails, phones"
+        bind:keyword={$searchStore.searchTerm}
+      />
     </div>
   </div>
 

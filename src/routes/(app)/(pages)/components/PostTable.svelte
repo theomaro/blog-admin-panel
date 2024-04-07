@@ -73,8 +73,6 @@
             </p></td
           >
         </tr>
-      {:else}
-        <p class="font-semibold text-lg mt-12">Ooops! No posts added yet</p>
       {/each}
     </tbody>
   </table>

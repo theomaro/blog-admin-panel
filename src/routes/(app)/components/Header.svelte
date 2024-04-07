@@ -1,8 +1,9 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { page } from "$app/stores";
+  import type { User } from "$lib";
   import profileImage from "$lib/images/pavatar.jpg";
-  export let user: App.User | null;
+  export let user: User | null;
 
   let showContainer: HTMLDivElement;
 
@@ -12,7 +13,7 @@
 
 <svelte:window on:click={hideProfileMenu} />
 
-<header class="w-full py-1 flex items-center justify-between">
+<header class="w-full pt-1 flex items-center justify-between">
   <div class="flex items-center justify-between">
     <button
       on:click={() => goto("/")}

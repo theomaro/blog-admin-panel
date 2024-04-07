@@ -1,24 +1,51 @@
 <script lang="ts">
   import PostTable from "./../components/PostTable.svelte";
   import type { PageData } from "./$types";
+  import SearchFilter from "../components/SearchFilter.svelte";
+  import type { Post, SearchPost } from "$lib";
+  import { createSearchStore, searchHandler } from "$lib/stores/searchStore";
+  import { onDestroy } from "svelte";
 
   export let data: PageData;
+
+  const searchUsers: SearchPost[] = data.posts.map((post: Post) => ({
+    ...post,
+    searchTerms: `${post.title} ${post.summary} ${post.author.full_name}`,
+  }));
+
+  const searchStore = createSearchStore(searchUsers);
+  const unsubscribe = searchStore.subscribe((model) => searchHandler(model));
+
+  onDestroy(() => {
+    unsubscribe();
+  });
 </script>
 
 <h1 class="capitalize py-1.5">Home / Posts</h1>
 
-<div class="mt-12">
-  <div class=" flex justify-between items-center mb-5">
-    <h2 class="text-xl"><i class="fas fa-list mr-3"></i> Latest Posts</h2>
+<div class="w-full mt-8">
+  <div
+    class="flex flex-col gap-6 md:gap-0 md:flex-row md:justify-between md:items-end"
+  >
+    <h2 class="text-xl">
+      <i class="fas fa-list mr-3 text-primary-800 font-semibold"></i> Latest Posts
+    </h2>
 
-    <button
-      class="text-white font-semibold bg-blue-600 hover:bg-blue-700 flex items-center justify-center shadow-lg rounded-lg px-5 py-2"
-    >
-      <i class="fas fa-plus mr-3"></i> New Post
-    </button>
+    <div class="md:basis-1/2 lg:basis-1/3">
+      <SearchFilter
+        placeholderText="title, summary, author"
+        bind:keyword={$searchStore.searchTerm}
+      />
+    </div>
   </div>
 
-  <div class="bg-white overflow-auto">
-    <PostTable posts={data.posts} />
-  </div>
+  {#if $searchStore.filtered.length !== 0}
+    <div class="bg-white overflow-auto my-8">
+      <PostTable posts={$searchStore.filtered} />
+    </div>
+
+    <!-- <Paginator /> -->
+  {:else}
+    <p class="font-semibold text-lg mt-12">Ooops! No posts added yet</p>
+  {/if}
 </div>

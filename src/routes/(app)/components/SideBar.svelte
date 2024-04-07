@@ -1,7 +1,8 @@
 <script lang="ts">
   import { page } from "$app/stores";
+  import type { User } from "$lib";
   import profileImage from "$lib/images/pavatar.jpg";
-  export let user: App.User | null;
+  export let user: User | null;
 
   const handleClick = (
     event: MouseEvent & { currentTarget: EventTarget & HTMLAnchorElement }

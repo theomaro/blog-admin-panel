@@ -49,6 +49,20 @@ interface Post {
   modified_at: string | null;
 }
 
+interface SearchPost {
+  searchTerms: string;
+  title: string;
+  summary: string;
+  status: string;
+  slug_url: string;
+  author: {
+    full_name: string | null;
+    username: string;
+    avatar_url: string | null;
+  };
+  modified_at: string | null;
+}
+
 interface PostDetail {
   title: string;
   meta_title: string | null;

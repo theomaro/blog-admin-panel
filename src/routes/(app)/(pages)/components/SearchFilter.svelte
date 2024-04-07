@@ -1,5 +1,6 @@
 <script lang="ts">
   export let keyword: string;
+  export let placeholderText: string;
 </script>
 
 <form>
@@ -14,7 +15,7 @@
         type="search"
         id="search-dropdown"
         class="block px-2.5 py-1.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded border border-gray-300 focus:ring-primary-400 focus:border-primary-400"
-        placeholder="Search names, emails, phones ..."
+        placeholder="Search {placeholderText} ..."
         required
         bind:value={keyword}
       />
