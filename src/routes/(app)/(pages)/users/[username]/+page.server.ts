@@ -2,6 +2,7 @@ import { API_URL } from "$env/static/private";
 import { fail, redirect, type Actions } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import { profileSchema } from "$lib/validators";
+import type { UserDetail } from "$lib";
 
 export const load: PageServerLoad = async ({ params, cookies, parent }) => {
   await parent();
@@ -9,7 +10,11 @@ export const load: PageServerLoad = async ({ params, cookies, parent }) => {
   const { username } = params;
 
   // get user profile by username
-  const res = await fetch(`${API_URL}/users/${username}`, {
+  const res: {
+    success: boolean;
+    message: string;
+    user: UserDetail;
+  } = await fetch(`${API_URL}/users/${username}`, {
     method: "POST",
     body: JSON.stringify({
       token: cookies.get("session"),

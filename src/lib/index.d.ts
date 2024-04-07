@@ -9,7 +9,7 @@ export interface User {
   last_login_at: string | "";
 }
 
-interface UserDetails {
+interface UserDetail {
   username: string;
   current_role: string;
   full_name: string | null;
@@ -34,6 +34,35 @@ interface SearchUser {
   avatar_url: string;
   current_status: string;
   last_login_at: string;
+}
+
+interface Post {
+  title: string;
+  summary: string;
+  status: string;
+  slug_url: string;
+  author: {
+    full_name: string | null;
+    username: string;
+    avatar_url: string | null;
+  };
+  modified_at: string | null;
+}
+
+interface PostDetail {
+  title: string;
+  meta_title: string | null;
+  summary: string;
+  body: string | null;
+  status: string;
+  banner_url: string | null;
+  slug_url: string;
+  author: {
+    full_name: string | null;
+    username: string;
+    avatar_url: string | null;
+  };
+  modified_at: string | null;
 }
 
 interface SearchStoreModel<T extends Record<PropertyKey, any>> {

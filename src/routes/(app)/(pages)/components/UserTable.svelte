@@ -1,14 +1,11 @@
 <script lang="ts">
   import type { User } from "$lib";
   import profileImage from "$lib/images/pavatar.jpg";
+  import { getFormattedDate } from "$lib/utils";
 
   export let users: User[];
   export let pageSize: number = 10;
   export let currentPage: number = 1;
-
-  const getFormattedDate = (dateInput: string) => {
-    return new Date(dateInput).toDateString().slice(4);
-  };
 </script>
 
 <div class="overflow-auto pb-2">

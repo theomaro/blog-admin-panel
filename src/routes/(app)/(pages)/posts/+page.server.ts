@@ -1,16 +1,16 @@
 import { API_URL } from "$env/static/private";
 import { fail } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
-import type { User } from "$lib";
+import type { Post } from "$lib";
 
 export const load: PageServerLoad = async ({ fetch, cookies, parent }) => {
   await parent();
 
   const res: {
-    message: string;
     success: boolean;
-    users: User[];
-  } = await fetch(`${API_URL}/users`, {
+    message: string;
+    posts: Post[];
+  } = await fetch(`${API_URL}/posts`, {
     method: "POST",
     body: JSON.stringify({
       token: cookies.get("session"),
@@ -21,6 +21,6 @@ export const load: PageServerLoad = async ({ fetch, cookies, parent }) => {
   if (!res.success) throw fail(400, { message: res.message });
 
   return {
-    users: res.users,
+    posts: res.posts,
   };
 };
