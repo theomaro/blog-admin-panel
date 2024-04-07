@@ -5,16 +5,23 @@
   import type { Post, SearchPost } from "$lib";
   import { createSearchStore, searchHandler } from "$lib/stores/searchStore";
   import { onDestroy } from "svelte";
+  import Paginator from "../components/Paginator.svelte";
 
   export let data: PageData;
 
-  const searchUsers: SearchPost[] = data.posts.map((post: Post) => ({
+  const searchPosts: SearchPost[] = data.posts.map((post: Post) => ({
     ...post,
     searchTerms: `${post.title} ${post.summary} ${post.author.full_name}`,
   }));
 
-  const searchStore = createSearchStore(searchUsers);
+  const searchStore = createSearchStore(searchPosts);
   const unsubscribe = searchStore.subscribe((model) => searchHandler(model));
+
+  let pageSize: number = 10;
+  let currentPage: number = 1;
+  $: totalItems = searchPosts.length;
+  $: totalPages = Math.ceil(totalItems / pageSize);
+  $: currentPage = currentPage <= totalPages ? currentPage : 1;
 
   onDestroy(() => {
     unsubscribe();
@@ -41,10 +48,10 @@
 
   {#if $searchStore.filtered.length !== 0}
     <div class="bg-white overflow-auto my-8">
-      <PostTable posts={$searchStore.filtered} />
+      <PostTable posts={$searchStore.filtered} bind:pageSize bind:currentPage />
     </div>
 
-    <!-- <Paginator /> -->
+    <Paginator bind:pageSize bind:currentPage bind:totalItems bind:totalPages />
   {:else}
     <p class="font-semibold text-lg mt-12">Ooops! No posts added yet</p>
   {/if}

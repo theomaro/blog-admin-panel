@@ -4,6 +4,8 @@
   import { getFormattedDate } from "$lib/utils";
 
   export let posts: Post[];
+  export let pageSize: number = 10;
+  export let currentPage: number = 1;
 </script>
 
 <div class="overflow-auto pb-2">
@@ -22,11 +24,13 @@
     </thead>
 
     <tbody class="text-gray-700 text-xs md:text-sm">
-      {#each posts as post, i}
+      {#each posts.slice(pageSize * (currentPage - 1), pageSize * currentPage) as post, idx}
         <tr
           class="even:bg-gray-200 flex items-center justify-between lg:justify-evenly"
         >
-          <td class="text-center py-1.5 w-14">{i + 1}</td>
+          <td class="text-center py-1.5 w-14"
+            >{pageSize * (currentPage - 1) + idx + 1}</td
+          >
           <td class="py-1.5 w-16 lg:w-40">
             <div class="flex flex-col items-center lg:flex-row">
               <a

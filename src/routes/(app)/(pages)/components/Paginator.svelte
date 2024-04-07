@@ -27,10 +27,10 @@
         id="pageSize"
         class="border border-gray-300 text-sm p-0 ps-2 pt-1 pb-0.5 w-10 cursor-pointer custom-select focus:ring-0 focus:border-primary-600"
       >
-        <option value={10}>10</option>
-        <option value={25}>25</option>
-        <option value={50}>50</option>
-        <option value={100}>100</option>
+        <option disabled={totalItems < 10} value={10}>10</option>
+        <option disabled={totalItems < 15} value={25}>25</option>
+        <option disabled={totalItems < 50} value={50}>50</option>
+        <option disabled={totalItems < 100} value={100}>100</option>
       </select>
       <span>record(s) out of {totalItems} total</span>
     </div>
