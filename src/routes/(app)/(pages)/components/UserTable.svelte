@@ -42,7 +42,7 @@
               </a>
               <span
                 class="lg:ml-3 font-semibold hidden lg:block whitespace-nowrap"
-                >{user.full_name || ""}</span
+                >{user.full_name ?? ""}</span
               >
             </div>
           </td>

@@ -4,7 +4,7 @@
   import UserTable from "../components/UserTable.svelte";
   import type { PageData } from "./$types";
   import type { SearchUser, User } from "$lib";
-  import { createSearchStore, searchHandler } from "$lib/stores/searchStore";
+  import { createSearchStore, searchHandler } from "$lib/stores/search";
   import { onDestroy } from "svelte";
 
   export let data: PageData;

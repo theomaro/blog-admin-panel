@@ -3,7 +3,7 @@
   import type { PageData } from "./$types";
   import SearchFilter from "../components/SearchFilter.svelte";
   import type { Post, SearchPost } from "$lib";
-  import { createSearchStore, searchHandler } from "$lib/stores/searchStore";
+  import { createSearchStore, searchHandler } from "$lib/stores/search";
   import { onDestroy } from "svelte";
   import Paginator from "../components/Paginator.svelte";
 

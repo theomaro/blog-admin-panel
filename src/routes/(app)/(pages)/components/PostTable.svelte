@@ -26,7 +26,7 @@
     <tbody class="text-gray-700 text-xs md:text-sm">
       {#each posts.slice(pageSize * (currentPage - 1), pageSize * currentPage) as post, idx}
         <tr
-          class="even:bg-gray-200 flex items-center justify-between lg:justify-evenly"
+          class="even:bg-gray-100 flex items-center justify-between lg:justify-evenly"
         >
           <td class="text-center py-1.5 w-14"
             >{pageSize * (currentPage - 1) + idx + 1}</td
@@ -35,7 +35,7 @@
             <div class="flex flex-col items-center lg:flex-row">
               <a
                 href="users/{post.author.username}"
-                class="flex-shrink-0 w-8 h-8 md:w-9 md:h-9"
+                class="flex-shrink-0 w-8 h-8 2xl:w-9 2xl:h-9"
               >
                 <img
                   class="w-full h-full rounded-full"
@@ -71,9 +71,7 @@
           </td>
           <td class="py-1.5 w-24"
             ><p class="text-xs">
-              {post.modified_at
-                ? getFormattedDate(post.modified_at)
-                : "Jan 20, 2004"}
+              {post.modified_at ? getFormattedDate(post.modified_at) : ""}
             </p></td
           >
         </tr>
