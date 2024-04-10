@@ -29,7 +29,7 @@
     <a
       on:click={handleClick}
       href="/dashboard"
-      class="space-x-3 item-link {$page.url.pathname === '/dashboard'
+      class="space-x-3 item-link {$page.url.pathname.includes('/dashboard')
         ? 'active-link'
         : ''}"
     >
@@ -41,7 +41,7 @@
     <a
       on:click={handleClick}
       href="/users"
-      class="space-x-3 item-link {$page.url.pathname === '/users'
+      class="space-x-3 item-link {$page.url.pathname.includes('/users')
         ? 'active-link'
         : ''}"
     >
@@ -53,7 +53,7 @@
     <a
       on:click={handleClick}
       href="/posts"
-      class="space-x-3 item-link {$page.url.pathname === '/posts'
+      class="space-x-3 item-link {$page.url.pathname.includes('/posts')
         ? 'active-link'
         : ''}"
     >
@@ -65,7 +65,7 @@
     <a
       on:click={handleClick}
       href="/comments"
-      class="space-x-3 item-link {$page.url.pathname === '/comments'
+      class="space-x-3 item-link {$page.url.pathname.includes('/comments')
         ? 'active-link'
         : ''}"
     >

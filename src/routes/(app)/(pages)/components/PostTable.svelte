@@ -55,7 +55,7 @@
           >
           <td class="py-1.5 w-72 lg:w-1/3 ms-4 lg:ms-0">
             <p class="">
-              {post.summary.slice(0, post.summary.indexOf("."))}...
+              {post.summary.slice(0, 80)}...
             </p>
           </td>
           <td class="text-center py-1.5 w-28">
