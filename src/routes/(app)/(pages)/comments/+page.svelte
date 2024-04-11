@@ -1,11 +1,26 @@
 <script lang="ts">
-  import type { Comment } from "$lib";
+  import type { Comment, SearchComment } from "$lib";
+  import { createSearchStore, searchHandler } from "$lib/stores/search";
+  import { onDestroy } from "svelte";
   import CommentTable from "../components/CommentTable.svelte";
   import type { PageData } from "./$types";
+  import SearchFilter from "../components/SearchFilter.svelte";
 
   export let data: PageData;
 
-  const comments: Comment[] = data.comments;
+  const searchComments: SearchComment[] = data.comments.map(
+    (comment: Comment) => ({
+      ...comment,
+      searchTerms: `${comment.content} ${comment.post.title} ${comment.author.full_name}`,
+    })
+  );
+
+  const searchStore = createSearchStore(searchComments);
+  const unsubscribe = searchStore.subscribe((model) => searchHandler(model));
+
+  onDestroy(() => {
+    unsubscribe();
+  });
 </script>
 
 <h1 class="capitalize py-1.5">Home / Comments</h1>
@@ -19,13 +34,16 @@
     </h2>
 
     <div class="md:basis-1/2 lg:basis-1/3">
-      <!-- <SearchFilter /> -->
+      <SearchFilter
+        placeholderText="content, post, creator"
+        bind:keyword={$searchStore.searchTerm}
+      />
     </div>
   </div>
 
-  {#if comments.length !== 0}
+  {#if $searchStore.filtered.length !== 0}
     <div class="bg-white overflow-auto my-8">
-      <CommentTable {comments} />
+      <CommentTable comments={$searchStore.filtered} />
     </div>
 
     <!-- <Paginator /> -->

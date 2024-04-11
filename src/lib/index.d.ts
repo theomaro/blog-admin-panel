@@ -98,6 +98,24 @@ interface Comment {
   modified_at: string;
 }
 
+interface SearchComment {
+  searchTerms: string;
+  id: string;
+  content: string;
+  status: string;
+  author: {
+    username: string;
+    full_name: string | null;
+    avatar_url: string | null;
+  };
+  post: {
+    title: string;
+    slug_url: string;
+  };
+  created_at: string;
+  modified_at: string;
+}
+
 interface SearchStoreModel<T extends Record<PropertyKey, any>> {
   data: T[];
   filtered: T[];
@@ -110,4 +128,4 @@ interface PaginateStoreModel<T extends Record<PropertyKey, any>> {
   totalRows: number;
 }
 
-export { User, UserDetail, SearchUser, Post, PostDetail, SearchPost, Comment };
+export { User, UserDetail, SearchUser, Post, PostDetail, SearchPost, Comment, SearchComment };
