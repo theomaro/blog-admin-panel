@@ -54,9 +54,9 @@
             ></td
           >
           <td class="py-1.5 w-72 lg:w-1/3 ms-4 lg:ms-0">
-            <p class="">
+            <a class="hover:text-blue-600" href="/comments/{comment.id}">
               {comment.content.slice(0, 80)}...
-            </p>
+            </a>
           </td>
           <td class="text-center py-1.5 w-28">
             <span

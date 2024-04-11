@@ -21,7 +21,6 @@ export const load: PageServerLoad = async ({
     method: "POST",
     body: JSON.stringify({
       token: cookies.get("session"),
-      slug_url,
     }),
     headers: { "content-type": "application/json" },
   }).then((res) => res.json());
