@@ -2,7 +2,6 @@ import { API_URL } from "$env/static/private";
 import { fail, type Actions, redirect } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import type { PostDetail } from "$lib";
-import { customRedirect } from "$lib/utils";
 
 export const load: PageServerLoad = async ({
   fetch,

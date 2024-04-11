@@ -1,4 +1,4 @@
-export interface User {
+interface User {
   username: string;
   current_role: string;
   full_name: string | "";
@@ -81,6 +81,23 @@ interface PostDetail {
   modified_at: string | null;
 }
 
+interface Comment {
+  id: string;
+  content: string;
+  status: string;
+  author: {
+    username: string;
+    full_name: string | null;
+    avatar_url: string | null;
+  };
+  post: {
+    title: string;
+    slug_url: string;
+  };
+  created_at: string;
+  modified_at: string;
+}
+
 interface SearchStoreModel<T extends Record<PropertyKey, any>> {
   data: T[];
   filtered: T[];
@@ -92,3 +109,5 @@ interface PaginateStoreModel<T extends Record<PropertyKey, any>> {
   totalItems: number;
   totalRows: number;
 }
+
+export { User, UserDetail, SearchUser, Post, PostDetail, SearchPost, Comment };

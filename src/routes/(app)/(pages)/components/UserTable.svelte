@@ -11,7 +11,7 @@
 <div class="overflow-auto pb-2">
   <table class="min-w-full leading-normal">
     <thead
-      class="bg-gray-800 text-white text-sm text-left font-semibold uppercase tracking-wider"
+      class="bg-gray-800 text-white text-xs 2xl:text-sm text-left font-semibold uppercase tracking-wider"
     >
       <tr>
         <th class="ps-3 py-3">#</th>
@@ -24,7 +24,7 @@
       </tr>
     </thead>
 
-    <tbody class="text-gray-700 whitespace-no-wrap text-sm">
+    <tbody class="text-gray-700 whitespace-no-wrap text-xs 2xl:text-sm">
       {#each users.slice(pageSize * (currentPage - 1), pageSize * currentPage) as user, idx}
         <tr class="even:bg-gray-100">
           <td class="ps-3 py-1.5">{pageSize * (currentPage - 1) + idx + 1}</td>
@@ -37,12 +37,12 @@
                 <img
                   class="w-full h-full rounded-full"
                   src={user?.avatar_url || profileImage}
-                  alt={user?.full_name ?? ""}
+                  alt={user?.full_name ?? "Unknown"}
                 />
               </a>
               <span
                 class="lg:ml-3 font-semibold hidden lg:block whitespace-nowrap"
-                >{user.full_name ?? ""}</span
+                >{user.full_name ?? "Unknown"}</span
               >
             </div>
           </td>
