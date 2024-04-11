@@ -14,12 +14,25 @@
 </div>
 
 {#if data.post.status === "approved"}
-  <div class="absolute right-24 top-2 z-10">
+  <form class="absolute right-24 top-2 z-10">
     <button
+      formmethod="post"
+      formaction="?/publish"
       class="bg-emerald-700 font-semibold text-white px-6 py-1.5 border-2 border-transparent hover:border-emerald-700 hover:bg-transparent hover:text-emerald-700"
       >Publish It</button
     >
-  </div>
+  </form>
+{/if}
+
+{#if data.post.status === "published"}
+  <form class="absolute right-24 top-2 z-10">
+    <button
+      formmethod="post"
+      formaction="?/archive"
+      class="bg-cyan-700 font-semibold text-white px-6 py-1.5 border-2 border-transparent hover:border-cyan-700 hover:bg-transparent hover:text-cyan-700"
+      >Archive It</button
+    >
+  </form>
 {/if}
 
 <section
@@ -62,7 +75,14 @@
   <!-- Author-LastModified -->
   <article class="flex justify-between items-center my-8">
     <div class="flex flex-col">
-      <p class="text-sm text-gray-500">Written by</p>
+      <div class="flex items-center gap-2">
+        <p class="text-sm text-gray-500">Written by</p>
+        <span
+          class="bg-{data.post.status} text-{data.post
+            .status} text-xs leading-tight rounded-full py-0.5 px-2"
+          >{data.post.status}</span
+        >
+      </div>
       <a href="/users/{data.post.author.username}" class="hover:text-gray-800"
         >{data.post.author.full_name ?? "Unknown"}</a
       >

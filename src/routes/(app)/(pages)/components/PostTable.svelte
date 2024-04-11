@@ -71,7 +71,9 @@
           </td>
           <td class="py-1.5 w-24"
             ><p class="text-xs">
-              {post.modified_at ? getFormattedDate(post.modified_at) : ""}
+              {post.modified_at
+                ? getFormattedDate(post.modified_at)
+                : getFormattedDate(post.created_at)}
             </p></td
           >
         </tr>
@@ -79,47 +81,3 @@
     </tbody>
   </table>
 </div>
-
-<style lang="postcss">
-  .bg-published {
-    @apply bg-green-200;
-  }
-  .text-published {
-    @apply text-green-900;
-  }
-
-  .bg-approved {
-    @apply bg-sky-200;
-  }
-  .text-approved {
-    @apply text-sky-900;
-  }
-
-  .bg-disapproved {
-    @apply bg-red-200;
-  }
-  .text-disapproved {
-    @apply text-red-900;
-  }
-
-  .bg-archived {
-    @apply bg-stone-200;
-  }
-  .text-archived {
-    @apply text-stone-900;
-  }
-
-  .bg-draft {
-    @apply bg-indigo-200;
-  }
-  .text-draft {
-    @apply text-indigo-900;
-  }
-
-  .bg-submitted {
-    @apply bg-fuchsia-200;
-  }
-  .text-submitted {
-    @apply text-fuchsia-900;
-  }
-</style>

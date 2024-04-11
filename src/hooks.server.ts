@@ -1,6 +1,6 @@
 import { redirect, type Handle } from "@sveltejs/kit";
 import { API_URL } from "$env/static/private";
-import { handleLoginRedirect } from "$lib/utils";
+import { customRedirect, handleLoginRedirect } from "$lib/utils";
 
 export const handle: Handle = async ({ event, resolve }) => {
   const unProtectedRoutes = ["/signin", "/signup"];
@@ -10,9 +10,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 
   if (!token && protectedRoutes) {
     if (!event.locals.currentUser) {
-      // initialize the redirect to url
       throw redirect(302, handleLoginRedirect(event.url));
     }
+  }
+
+  if (token && unProtectedRoutes.includes(event.url.pathname)) {
+    return customRedirect("/", "Welcome back");
   }
 
   if (token && !unProtectedRoutes.includes(event.url.pathname)) {
@@ -26,6 +29,7 @@ export const handle: Handle = async ({ event, resolve }) => {
         headers: { "content-type": "application/json" },
       })
       .then((results) => results.json());
+
     if (!res.success) {
       return customRedirect(
         `/signin?redirectTo=${fromUrl.slice(1)}`,
@@ -37,10 +41,3 @@ export const handle: Handle = async ({ event, resolve }) => {
 
   return await resolve(event);
 };
-
-// custom redirect from joy of code `https://github.com/JoysOfCode/sveltekit-auth-cookies/blob/migration/src/hooks.ts`
-const customRedirect = (location: string, body?: string) =>
-  new Response(body, {
-    status: 303,
-    headers: { location },
-  });

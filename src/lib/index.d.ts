@@ -46,6 +46,7 @@ interface Post {
     username: string;
     avatar_url: string | null;
   };
+  created_at: string;
   modified_at: string | null;
 }
 
