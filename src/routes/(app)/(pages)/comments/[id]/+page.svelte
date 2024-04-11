@@ -7,12 +7,11 @@
 
   let dropdownMenu: HTMLUListElement;
 
-  function dropDownMenuToggler(
-    event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
-  ) {
-    dropdownMenu.classList.toggle("hidden");
-  }
+  const toggleDropDownMenu = () => dropdownMenu.classList.toggle("hidden");
+  const hideDropDownMenu = () => dropdownMenu.classList.add("hidden");
 </script>
+
+<svelte:window on:click={hideDropDownMenu} />
 
 <div class="flex items-start justify-between gap-8 mt-8 px-6">
   <section
@@ -38,7 +37,7 @@
       <button
         class="inline-flex items-center text-sm font-medium text-center text-gray-500 rounded-lg rotate-90"
         type="button"
-        on:click={dropDownMenuToggler}
+        on:click|stopPropagation={toggleDropDownMenu}
       >
         <svg
           class="w-4 h-4"
