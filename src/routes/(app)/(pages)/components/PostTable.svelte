@@ -50,7 +50,7 @@
           </td>
           <td class="py-1.5 w-48 lg:w-1/5">
             <a class="hover:text-blue-600" href="/posts/{post.slug_url}"
-              >{post.title}</a
+              >{post.title.slice(0, 40)}</a
             ></td
           >
           <td class="py-1.5 w-72 lg:w-1/3 ms-4 lg:ms-0">

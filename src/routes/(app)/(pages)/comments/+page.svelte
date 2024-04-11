@@ -5,6 +5,7 @@
   import CommentTable from "../components/CommentTable.svelte";
   import type { PageData } from "./$types";
   import SearchFilter from "../components/SearchFilter.svelte";
+  import Paginator from "../components/Paginator.svelte";
 
   export let data: PageData;
 
@@ -17,6 +18,12 @@
 
   const searchStore = createSearchStore(searchComments);
   const unsubscribe = searchStore.subscribe((model) => searchHandler(model));
+
+  let pageSize: number = 10;
+  let currentPage: number = 1;
+  $: totalItems = searchComments.length;
+  $: totalPages = Math.ceil(totalItems / pageSize);
+  $: currentPage = currentPage <= totalPages ? currentPage : 1;
 
   onDestroy(() => {
     unsubscribe();
@@ -43,10 +50,14 @@
 
   {#if $searchStore.filtered.length !== 0}
     <div class="bg-white overflow-auto my-8">
-      <CommentTable comments={$searchStore.filtered} />
+      <CommentTable
+        comments={$searchStore.filtered}
+        bind:pageSize
+        bind:currentPage
+      />
     </div>
 
-    <!-- <Paginator /> -->
+    <Paginator bind:pageSize bind:currentPage bind:totalItems bind:totalPages />
   {:else}
     <p class="font-semibold text-lg mt-12">Ooops! No comments added yet</p>
   {/if}

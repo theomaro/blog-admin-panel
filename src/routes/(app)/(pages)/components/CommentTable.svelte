@@ -4,6 +4,8 @@
   import { getFormattedDate } from "$lib/utils";
 
   export let comments: Comment[];
+  export let pageSize: number = 10;
+  export let currentPage: number = 1;
 </script>
 
 <div class="overflow-auto pb-2">
@@ -22,11 +24,13 @@
     </thead>
 
     <tbody class="text-gray-700 text-xs 2xl:text-sm">
-      {#each comments as comment, i}
+      {#each comments.slice(pageSize * (currentPage - 1), pageSize * currentPage) as comment, idx}
         <tr
           class="even:bg-gray-100 flex items-center justify-between lg:justify-evenly"
         >
-          <td class="px-5 py-2 border-b border-gray-200">{i + 1}</td>
+          <td class="px-5 py-2 border-b border-gray-200"
+            >{pageSize * (currentPage - 1) + idx + 1}</td
+          >
           <td class="py-1.5 w-16 lg:w-40">
             <div class="flex flex-col items-center lg:flex-row">
               <a
