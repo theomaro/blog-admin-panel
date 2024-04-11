@@ -81,26 +81,3 @@
     </tbody>
   </table>
 </div>
-
-<style lang="postcss">
-  .bg-approved {
-    @apply bg-green-200;
-  }
-  .text-approved {
-    @apply text-green-900;
-  }
-
-  .bg-disapproved {
-    @apply bg-red-200;
-  }
-  .text-disapproved {
-    @apply text-red-900;
-  }
-
-  .bg-pending {
-    @apply bg-amber-200;
-  }
-  .text-pending {
-    @apply text-amber-900;
-  }
-</style>
