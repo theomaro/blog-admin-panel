@@ -35,11 +35,13 @@ export const load: PageServerLoad = async ({
 };
 
 export const actions: Actions = {
-  approve: async ({ fetch, cookies, params }) => {
+  approve: async ({ fetch, cookies, params, request }) => {
     const { id } = params;
+    const formData = await request.formData();
+    const commentId = formData.get("id");
 
     const res = await fetch(
-      `${API_URL}/comments/${id}/change-status?status=approved`,
+      `${API_URL}/comments/${commentId}/change-status?status=approved`,
       {
         method: "POST",
         body: JSON.stringify({
@@ -56,11 +58,13 @@ export const actions: Actions = {
     throw redirect(302, `/comments/${id}`);
   },
 
-  disapprove: async ({ fetch, cookies, params }) => {
+  disapprove: async ({ fetch, cookies, params, request }) => {
     const { id } = params;
+    const formData = await request.formData();
+    const commentId = formData.get("id");
 
     const res = await fetch(
-      `${API_URL}/comments/${id}/change-status?status=disapproved`,
+      `${API_URL}/comments/${commentId}/change-status?status=disapproved`,
       {
         method: "POST",
         body: JSON.stringify({

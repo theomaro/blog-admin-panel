@@ -7,15 +7,11 @@
 </script>
 
 <div class="grid grid-cols-12 grid-rows-6 gap-6 mt-8 items-start">
-  <section
-    class="space-y-3 p-6 relative shadow-lg rounded-md col-span-7 row-span-1"
-  >
+  <section class="space-y-3 p-6 shadow-lg rounded-md col-span-7 row-span-1">
     <Comment comment={data.comment} />
   </section>
 
-  <section
-    class="relative shadow-lg rounded-md overflow-hidden col-span-5 row-span-6"
-  >
+  <section class="shadow-lg rounded-md col-span-5 row-span-6 overflow-hidden">
     <h3
       class="font-semibold border-b-2 border-b-slate-600 text-white bg-slate-800 px-4 pb-1.5 pt-2 text-sm"
     >
@@ -23,7 +19,7 @@
     </h3>
 
     {#each data.replies as reply}
-      <div class="pe-4 ms-4 py-4 border-b-2">
+      <div class="border-b-2 space-y-3 p-6">
         <Comment comment={reply} />
       </div>
     {:else}

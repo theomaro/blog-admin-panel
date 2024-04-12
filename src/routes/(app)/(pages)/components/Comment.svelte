@@ -28,24 +28,72 @@
     >
   </div>
 
-  <button
-    class="inline-flex items-center text-sm font-medium text-center text-gray-500 rounded-lg rotate-90"
-    type="button"
-    on:click|stopPropagation={toggleDropDownMenu}
-  >
-    <svg
-      class="w-4 h-4"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="currentColor"
-      viewBox="0 0 16 3"
+  <div class="relative">
+    <button
+      class="inline-flex items-center text-sm font-medium text-center text-gray-500 rounded-lg rotate-90"
+      type="button"
+      on:click|stopPropagation={toggleDropDownMenu}
     >
-      <path
-        d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"
-      />
-    </svg>
-    <span class="sr-only">Comment settings</span>
-  </button>
+      <svg
+        class="w-4 h-4"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        viewBox="0 0 16 3"
+      >
+        <path
+          d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"
+        />
+      </svg>
+      <span class="sr-only">Comment settings</span>
+    </button>
+
+    <!-- Dropdown menu -->
+    <ul
+      bind:this={dropdownMenu}
+      class="absolute hidden top-0 right-4 z-10 bg-gray-50 rounded shadow"
+    >
+      <li
+        class="border-b {comment.status === 'disapproved' ||
+        comment.status === 'pending'
+          ? ''
+          : 'hidden'} "
+      >
+        <form>
+          <input type="hidden" name="id" value={comment.id} />
+          <button
+            formmethod="post"
+            formaction="?/approve"
+            on:click={() => dropdownMenu.classList.toggle("hidden")}
+            class="py-2 px-3 text-xs text-gray-700 hover:text-sky-500 w-full text-start"
+            >Approve</button
+          >
+        </form>
+      </li>
+      <li class="border-b {comment.status === 'approved' ? '' : 'hidden'}">
+        <form>
+          <input type="hidden" name="id" value={comment.id} />
+          <button
+            formmethod="post"
+            formaction="?/disapprove"
+            on:click={() => dropdownMenu.classList.toggle("hidden")}
+            class="py-2 px-3 text-xs text-gray-700 hover:text-sky-500 w-full text-start"
+            >Disapprove</button
+          >
+        </form>
+      </li>
+      <li class="">
+        <form>
+          <input type="hidden" name="id" value={comment.id} />
+          <button
+            on:click={() => dropdownMenu.classList.toggle("hidden")}
+            class="py-2 px-3 text-xs text-gray-700 hover:text-sky-500 w-full text-start"
+            >Delete</button
+          >
+        </form>
+      </li>
+    </ul>
+  </div>
 </article>
 
 <article class="flex flex-col gap-y-3">
@@ -106,38 +154,3 @@
     </div>
   </div>
 </article>
-
-<!-- Dropdown menu -->
-<ul
-  bind:this={dropdownMenu}
-  class="absolute hidden -top-6 right-12 z-10 w-28 bg-gray-50 rounded shadow"
->
-  <li class="border-b {comment.status === 'disapproved' ? '' : 'hidden'}">
-    <form>
-      <button
-        formmethod="post"
-        formaction="?/approve"
-        on:click={() => dropdownMenu.classList.toggle("hidden")}
-        class="block py-2 ps-3 text-sm text-gray-700">Approve</button
-      >
-    </form>
-  </li>
-  <li class="border-b {comment.status === 'approved' ? '' : 'hidden'}">
-    <form>
-      <button
-        formmethod="post"
-        formaction="?/disapprove"
-        on:click={() => dropdownMenu.classList.toggle("hidden")}
-        class="block py-2 ps-3 text-sm text-gray-700">Disapprove</button
-      >
-    </form>
-  </li>
-  <li class="">
-    <form>
-      <button
-        on:click={() => dropdownMenu.classList.toggle("hidden")}
-        class="block py-2 ps-3 text-sm text-gray-700">Delete</button
-      >
-    </form>
-  </li>
-</ul>
