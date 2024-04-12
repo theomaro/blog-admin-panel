@@ -18,6 +18,7 @@
         <th class="py-3 w-16 lg:w-40">Created By</th>
         <th class="py-3 w-48 lg:w-1/5">Posted On</th>
         <th class="py-3 w-72 lg:w-1/3 ms-4 lg:ms-0">Content</th>
+        <th class="text-center py-3 w-14">Replies</th>
         <th class="text-center py-3 w-28">Status</th>
         <th class="py-3 w-24">modified at</th>
       </tr>
@@ -58,6 +59,9 @@
               {comment.content.slice(0, 80)}...
             </a>
           </td>
+          <td class="text-center py-3 w-14"
+            >{comment.parent_id ? "Yes" : "No"}</td
+          >
           <td class="text-center py-1.5 w-28">
             <span
               class="relative inline-block px-3 py-1 font-semibold text-xs text-{comment.status} leading-tight"

@@ -17,6 +17,7 @@ export const load: PageServerLoad = async ({
     success: boolean;
     message: string;
     comment: CommentDetail;
+    replies: CommentDetail[];
   } = await fetch(`${API_URL}/comments/${id}`, {
     method: "POST",
     body: JSON.stringify({
@@ -29,5 +30,6 @@ export const load: PageServerLoad = async ({
 
   return {
     comment: res.comment,
+    replies: res.replies,
   };
 };

@@ -95,7 +95,8 @@ interface Comment {
     slug_url: string;
   };
   created_at: string;
-  modified_at: string;
+  modified_at: string | null;
+  parent_id: string | null;
 }
 
 interface CommentDetail {
@@ -116,6 +117,7 @@ interface CommentDetail {
   };
   created_at: string;
   modified_at: string | null;
+  parent_id: string | null;
 }
 
 interface SearchComment {
