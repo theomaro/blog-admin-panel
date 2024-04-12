@@ -113,24 +113,31 @@
   class="absolute hidden -top-6 right-12 z-10 w-28 bg-gray-50 rounded shadow"
 >
   <li class="border-b {comment.status === 'disapproved' ? '' : 'hidden'}">
-    <a
-      on:click={() => dropdownMenu.classList.toggle("hidden")}
-      href="/comments/{comment.id}"
-      class="block py-2 ps-3 text-sm text-gray-700">Approve</a
-    >
+    <form>
+      <button
+        formmethod="post"
+        formaction="?/approve"
+        on:click={() => dropdownMenu.classList.toggle("hidden")}
+        class="block py-2 ps-3 text-sm text-gray-700">Approve</button
+      >
+    </form>
   </li>
   <li class="border-b {comment.status === 'approved' ? '' : 'hidden'}">
-    <a
-      on:click={() => dropdownMenu.classList.toggle("hidden")}
-      href="/comments/{comment.id}"
-      class="block py-2 ps-3 text-sm text-gray-700">Disapprove</a
-    >
+    <form>
+      <button
+        formmethod="post"
+        formaction="?/disapprove"
+        on:click={() => dropdownMenu.classList.toggle("hidden")}
+        class="block py-2 ps-3 text-sm text-gray-700">Disapprove</button
+      >
+    </form>
   </li>
   <li class="">
-    <a
-      on:click={() => dropdownMenu.classList.toggle("hidden")}
-      href="/comments/{comment.id}"
-      class="block py-2 ps-3 text-sm text-gray-700">Delete</a
-    >
+    <form>
+      <button
+        on:click={() => dropdownMenu.classList.toggle("hidden")}
+        class="block py-2 ps-3 text-sm text-gray-700">Delete</button
+      >
+    </form>
   </li>
 </ul>

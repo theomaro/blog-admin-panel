@@ -33,3 +33,47 @@ export const load: PageServerLoad = async ({
     replies: res.replies,
   };
 };
+
+export const actions: Actions = {
+  approve: async ({ fetch, cookies, params }) => {
+    const { id } = params;
+
+    const res = await fetch(
+      `${API_URL}/comments/${id}/change-status?status=approved`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          token: cookies.get("session"),
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((res) => res.json());
+
+    if (!res.success) throw fail(400, { message: res.message });
+
+    throw redirect(302, `/comments/${id}`);
+  },
+
+  disapprove: async ({ fetch, cookies, params }) => {
+    const { id } = params;
+
+    const res = await fetch(
+      `${API_URL}/comments/${id}/change-status?status=disapproved`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          token: cookies.get("session"),
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((res) => res.json());
+
+    if (!res.success) throw fail(400, { message: res.message });
+
+    throw redirect(302, `/comments/${id}`);
+  },
+};
