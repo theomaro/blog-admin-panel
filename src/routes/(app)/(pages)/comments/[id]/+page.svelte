@@ -22,7 +22,9 @@
 
     {#each data.replies as reply}
       <div class="border-b-2 space-y-3 p-6">
-        <Comment isReply="is-reply" comment={reply} />
+        <a href="/comments/{reply.id}"
+          ><Comment isReply="is-reply" comment={reply} /></a
+        >
       </div>
     {:else}
       <div class="ps-4 h-16 leading-[4rem] text-sm">

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { getFormattedDate } from "$lib/utils";
+  import Comment from "../../components/Comment.svelte";
   import type { PageData } from "./$types";
 
   export let data: PageData;
@@ -101,5 +102,29 @@
   <!-- Body -->
   <div class="prose prose-sm sm:prose lg:prose-lg mt-6">
     <p>{data.post.body ?? ""}</p>
+  </div>
+</section>
+
+<section class="px-8 max-w-3xl mx-auto">
+  <div class="flex items-center justify-between">
+    <h2 class="text-lg lg:text-xl font-bold text-gray-900">
+      Comments <span> &lpar;{data.comments.length}&rpar;</span>
+    </h2>
+
+    <a href="/" class="text-emerald-700"
+      >View all <i class="ri ri-arrow-right-line"></i></a
+    >
+  </div>
+
+  <div>
+    <ul class="shadow-lg rounded-md">
+      {#each data.comments as comment}
+        <li class="border-b-2 p-6 py-4">
+          <a href="/comments/{comment.id}" class="space-y-3 block">
+            <Comment {comment} />
+          </a>
+        </li>
+      {/each}
+    </ul>
   </div>
 </section>

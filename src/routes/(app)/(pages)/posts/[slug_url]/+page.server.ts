@@ -27,8 +27,23 @@ export const load: PageServerLoad = async ({
 
   if (!res.success) throw fail(400, { message: res.message });
 
+  const results: {
+    success: boolean;
+    message: string;
+    comments: any[];
+  } = await fetch(`${API_URL}/posts/${slug_url}/comments`, {
+    method: "POST",
+    body: JSON.stringify({
+      token: cookies.get("session"),
+    }),
+    headers: { "content-type": "application/json" },
+  }).then((res) => res.json());
+
+  if (!results.success) throw fail(400, { message: res.message });
+
   return {
     post: res.post,
+    comments: results.comments,
   };
 };
 
@@ -69,6 +84,56 @@ export const actions: Actions = {
         },
       }
     ).then((res) => res.json());
+
+    if (!res.success) throw fail(400, { message: res.message });
+
+    throw redirect(302, `/posts/${slug_url}`);
+  },
+
+  changeStatus: async ({ fetch, cookies, params, request }) => {
+    const { slug_url } = params;
+    const formData = await request.formData();
+    const commentId = formData.get("id");
+    const commentStatus = formData.get("status");
+
+    let status = "";
+    if (commentStatus === "approved") status = "disapproved";
+
+    if (commentStatus === "pending" || commentStatus === "disapproved")
+      status = "approved";
+
+    const res = await fetch(
+      `${API_URL}/comments/${commentId}/change-status?status=${status}`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          token: cookies.get("session"),
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((res) => res.json());
+
+    if (!res.success) return fail(400, { message: res.message });
+
+    throw redirect(302, `/posts/${slug_url}`);
+  },
+
+  delete: async ({ fetch, cookies, request, params }) => {
+    const { slug_url } = params;
+    const formData = await request.formData();
+    const commentId = formData.get("id");
+
+    const res = await fetch(`${API_URL}/comments/${commentId}`, {
+      method: "DELETE",
+      body: JSON.stringify({
+        token: cookies.get("session"),
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => res.json());
 
     if (!res.success) throw fail(400, { message: res.message });
 
