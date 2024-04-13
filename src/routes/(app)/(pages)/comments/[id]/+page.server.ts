@@ -35,13 +35,20 @@ export const load: PageServerLoad = async ({
 };
 
 export const actions: Actions = {
-  approve: async ({ fetch, cookies, params, request }) => {
+  changeStatus: async ({ fetch, cookies, params, request }) => {
     const { id } = params;
     const formData = await request.formData();
     const commentId = formData.get("id");
+    const commentStatus = formData.get("status");
+
+    let status = "";
+    if (commentStatus === "approved") status = "disapproved";
+
+    if (commentStatus === "pending" || commentStatus === "disapproved")
+      status = "approved";
 
     const res = await fetch(
-      `${API_URL}/comments/${commentId}/change-status?status=approved`,
+      `${API_URL}/comments/${commentId}/change-status?status=${status}`,
       {
         method: "POST",
         body: JSON.stringify({
@@ -53,31 +60,30 @@ export const actions: Actions = {
       }
     ).then((res) => res.json());
 
-    if (!res.success) throw fail(400, { message: res.message });
+    if (!res.success) return fail(400, { message: res.message });
 
     throw redirect(302, `/comments/${id}`);
   },
 
-  disapprove: async ({ fetch, cookies, params, request }) => {
+  delete: async ({ fetch, cookies, request, params }) => {
     const { id } = params;
     const formData = await request.formData();
     const commentId = formData.get("id");
+    const isReply = formData.get("is-reply") ?? "";
 
-    const res = await fetch(
-      `${API_URL}/comments/${commentId}/change-status?status=disapproved`,
-      {
-        method: "POST",
-        body: JSON.stringify({
-          token: cookies.get("session"),
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    ).then((res) => res.json());
+    const res = await fetch(`${API_URL}/comments/${commentId}`, {
+      method: "DELETE",
+      body: JSON.stringify({
+        token: cookies.get("session"),
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => res.json());
 
     if (!res.success) throw fail(400, { message: res.message });
 
-    throw redirect(302, `/comments/${id}`);
+    if (isReply) throw redirect(302, `/comments/${id}`);
+    else throw redirect(302, `/comments`);
   },
 };

@@ -6,24 +6,28 @@
   export let data: PageData;
 </script>
 
-<div class="grid grid-cols-12 grid-rows-6 gap-6 mt-8 items-start">
+<div class="grid grid-cols-12 gap-6 mt-8 items-start">
   <section class="space-y-3 p-6 shadow-lg rounded-md col-span-7 row-span-1">
     <Comment comment={data.comment} />
   </section>
 
-  <section class="shadow-lg rounded-md col-span-5 row-span-6 overflow-hidden">
+  <section class="shadow-lg rounded-md col-span-5 row-span-2 overflow-hidden">
     <h3
       class="font-semibold border-b-2 border-b-slate-600 text-white bg-slate-800 px-4 pb-1.5 pt-2 text-sm"
     >
-      Replies
+      Replies <span class="text-primary-700"
+        >&lpar;{data.replies.length}&rpar;</span
+      >
     </h3>
 
     {#each data.replies as reply}
       <div class="border-b-2 space-y-3 p-6">
-        <Comment comment={reply} />
+        <Comment isReply="is-reply" comment={reply} />
       </div>
     {:else}
-      <div class="p-4"><p>No replies</p></div>
+      <div class="ps-4 h-16 leading-[4rem] text-sm">
+        <p>No replies for this comment</p>
+      </div>
     {/each}
   </section>
 

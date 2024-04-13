@@ -16,7 +16,9 @@ export const load: PageServerLoad = async ({ parent, cookies }) => {
       token: cookies.get("session"),
     }),
     headers: { "content-type": "application/json" },
-  }).then((res) => res.json());
+  })
+    .then((res) => res.json())
+    .catch((error) => console.log(error.message));
 
   if (!res.success) throw fail(400, { message: res.message });
 

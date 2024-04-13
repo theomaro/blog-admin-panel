@@ -96,7 +96,7 @@ interface Comment {
   };
   created_at: string;
   modified_at: string | null;
-  parent_id: string | null;
+  totalReplies: number;
 }
 
 interface CommentDetail {
@@ -117,7 +117,6 @@ interface CommentDetail {
   };
   created_at: string;
   modified_at: string | null;
-  parent_id: string | null;
 }
 
 interface SearchComment {
@@ -135,7 +134,7 @@ interface SearchComment {
     slug_url: string;
   };
   created_at: string;
-  modified_at: string;
+  modified_at: string | null;
 }
 
 interface SearchStoreModel<T extends Record<PropertyKey, any>> {

@@ -8,6 +8,7 @@
 
   const toggleDropDownMenu = () => dropdownMenu.classList.toggle("hidden");
   const hideDropDownMenu = () => dropdownMenu.classList.add("hidden");
+  export let isReply: string = "";
 </script>
 
 <svelte:window on:click={hideDropDownMenu} />
@@ -61,9 +62,10 @@
       >
         <form>
           <input type="hidden" name="id" value={comment.id} />
+          <input type="hidden" name="status" value={comment.status} />
           <button
             formmethod="post"
-            formaction="?/approve"
+            formaction="?/changeStatus"
             on:click={() => dropdownMenu.classList.toggle("hidden")}
             class="py-2 px-3 text-xs text-gray-700 hover:text-sky-500 w-full text-start"
             >Approve</button
@@ -73,9 +75,10 @@
       <li class="border-b {comment.status === 'approved' ? '' : 'hidden'}">
         <form>
           <input type="hidden" name="id" value={comment.id} />
+          <input type="hidden" name="status" value={comment.status} />
           <button
             formmethod="post"
-            formaction="?/disapprove"
+            formaction="?/changeStatus"
             on:click={() => dropdownMenu.classList.toggle("hidden")}
             class="py-2 px-3 text-xs text-gray-700 hover:text-sky-500 w-full text-start"
             >Disapprove</button
@@ -85,7 +88,10 @@
       <li class="">
         <form>
           <input type="hidden" name="id" value={comment.id} />
+          <input type="hidden" name="is-reply" value={isReply} />
           <button
+            formmethod="post"
+            formaction="?/delete"
             on:click={() => dropdownMenu.classList.toggle("hidden")}
             class="py-2 px-3 text-xs text-gray-700 hover:text-sky-500 w-full text-start"
             >Delete</button

@@ -59,9 +59,7 @@
               {comment.content.slice(0, 80)}...
             </a>
           </td>
-          <td class="text-center py-3 w-14"
-            >{comment.parent_id ? "Yes" : "No"}</td
-          >
+          <td class="text-center py-3 w-14">{comment.totalReplies}</td>
           <td class="text-center py-1.5 w-28">
             <span
               class="relative inline-block px-3 py-1 font-semibold text-xs text-{comment.status} leading-tight"
