@@ -6,6 +6,7 @@
   import { createSearchStore, searchHandler } from "$lib/stores/search";
   import { onDestroy } from "svelte";
   import Paginator from "../components/Paginator.svelte";
+  import StatsCard from "../../components/StatsCard.svelte";
 
   export let data: PageData;
 
@@ -28,6 +29,17 @@
   });
 </script>
 
+<section
+  class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 2xl:grid-cols-6 gap-4 mt-4"
+>
+  {#each ["draft", "submitted", "approved", "disapproved", "published", "archived"] as status}
+    <StatsCard
+      value={data.posts.filter((post) => post.status === status).length}
+      title={status}
+    ></StatsCard>
+  {/each}
+</section>
+
 <div class="w-full mt-8">
   <div
     class="flex flex-col gap-6 md:gap-0 md:flex-row md:justify-between md:items-end"
@@ -45,7 +57,7 @@
   </div>
 
   {#if $searchStore.filtered.length !== 0}
-    <div class="bg-white overflow-auto my-8">
+    <div class="bg-white overflow-auto my-6">
       <PostTable posts={$searchStore.filtered} bind:pageSize bind:currentPage />
     </div>
 

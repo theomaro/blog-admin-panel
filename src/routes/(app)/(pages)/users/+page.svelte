@@ -6,6 +6,7 @@
   import type { SearchUser, User } from "$lib";
   import { createSearchStore, searchHandler } from "$lib/stores/search";
   import { onDestroy } from "svelte";
+  import StatsCard from "../../components/StatsCard.svelte";
 
   export let data: PageData;
 
@@ -28,6 +29,16 @@
   });
 </script>
 
+<section class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mt-4">
+  {#each ["admin", "editor", "author", "reader"] as role}
+    <StatsCard
+      value={data.users.filter((user) => user.current_role === role).length}
+      title={(role += "s")}
+    />
+  {/each}
+  <StatsCard value={data.users.length} title={"Total"} />
+</section>
+
 <div class="w-full mt-8">
   <div
     class="flex flex-col gap-6 md:gap-0 md:flex-row md:justify-between md:items-end"
@@ -45,7 +56,7 @@
   </div>
 
   {#if $searchStore.filtered.length !== 0}
-    <div class="bg-white overflow-auto my-8">
+    <div class="bg-white overflow-auto my-6">
       <UserTable users={$searchStore.filtered} bind:pageSize bind:currentPage />
     </div>
 

@@ -14,7 +14,7 @@
       class="bg-gray-800 text-white text-xs 2xl:text-sm text-left font-semibold uppercase tracking-wider"
     >
       <tr>
-        <th class="ps-3 py-3">#</th>
+        <th class="text-center ps-3 py-3">s/no</th>
         <th class="ps-3 py-3">User</th>
         <th class="ps-3 py-3">Email</th>
         <th class="ps-3 py-3">Phone</th>
@@ -29,7 +29,7 @@
     <tbody class="text-gray-700 whitespace-no-wrap text-xs 2xl:text-sm">
       {#each users.slice(pageSize * (currentPage - 1), pageSize * currentPage) as user, idx}
         <tr class="even:bg-gray-100">
-          <td class="ps-3 py-1.5">{pageSize * (currentPage - 1) + idx + 1}</td>
+          <td class="ps-3 py-1.5 text-center">{pageSize * (currentPage - 1) + idx + 1}</td>
           <td class="ps-3 py-1.5">
             <div class="flex flex-col items-start lg:flex-row lg:items-center">
               <a

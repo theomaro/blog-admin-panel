@@ -6,6 +6,7 @@
   import type { PageData } from "./$types";
   import SearchFilter from "../components/SearchFilter.svelte";
   import Paginator from "../components/Paginator.svelte";
+  import StatsCard from "../../components/StatsCard.svelte";
 
   export let data: PageData;
 
@@ -30,6 +31,17 @@
   });
 </script>
 
+<section class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-4">
+  {#each ["pending", "approved", "disapproved"] as status}
+    <StatsCard
+      value={data.comments.filter((comment) => comment.status === status)
+        .length}
+      title={status}
+    />
+  {/each}
+  <StatsCard value={data.comments.length} title={"Total"} />
+</section>
+
 <div class="w-full mt-8">
   <div
     class="flex flex-col gap-6 md:gap-0 md:flex-row md:justify-between md:items-end"
@@ -47,7 +59,7 @@
   </div>
 
   {#if $searchStore.filtered.length !== 0}
-    <div class="bg-white overflow-auto my-8">
+    <div class="bg-white overflow-auto my-6">
       <CommentTable
         comments={$searchStore.filtered}
         bind:pageSize
