@@ -22,6 +22,7 @@
         <th class="ps-3 py-3">Role</th>
         <th class="ps-3 py-3">login at</th>
         <th class="ps-3 py-3">Posts</th>
+        <th class="ps-3 py-3">Comments</th>
       </tr>
     </thead>
 
@@ -105,6 +106,28 @@
               ></span>
               <span
                 class="w-4 h-4 rounded-full border border-primary-400 even:bg-primary-300"
+              ></span>
+            </a>
+          </td>
+          <td class="ps-3 py-1.5">
+            <a
+              href="/users/{user.username}/comments"
+              class="flex items-center justify-center -space-x-1.5"
+            >
+              <span
+                class="w-4 h-4 rounded-full border border-sky-400 odd:bg-sky-700"
+              ></span>
+              <span
+                class="w-4 h-4 rounded-full border border-sky-400 odd:bg-sky-700"
+              ></span>
+              <span
+                class="w-4 h-4 rounded-full border border-sky-400 odd:bg-sky-700"
+              ></span>
+              <span
+                class="w-4 h-4 rounded-full border border-sky-400 odd:bg-sky-700"
+              ></span>
+              <span
+                class="w-4 h-4 rounded-full border border-sky-400 odd:bg-sky-700"
               ></span>
             </a>
           </td>

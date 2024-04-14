@@ -30,8 +30,6 @@
   });
 </script>
 
-<h1 class="capitalize py-1.5">Home / Comments</h1>
-
 <div class="w-full mt-8">
   <div
     class="flex flex-col gap-6 md:gap-0 md:flex-row md:justify-between md:items-end"
