@@ -27,7 +27,7 @@
     <tbody class="text-gray-700 text-xs 2xl:text-sm">
       {#each comments.slice(pageSize * (currentPage - 1), pageSize * currentPage) as comment, idx}
         <tr
-          class="even:bg-gray-100 flex items-center justify-between lg:justify-evenly"
+          class="even:bg-gray-100 flex gap-x-1 items-center justify-between lg:justify-evenly"
         >
           <td class="px-5 py-2 border-b border-gray-200"
             >{pageSize * (currentPage - 1) + idx + 1}</td

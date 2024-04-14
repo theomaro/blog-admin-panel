@@ -1,25 +1,27 @@
 <script lang="ts">
-  import PostTable from "./../components/PostTable.svelte";
-  import type { PageData } from "./$types";
-  import SearchFilter from "../components/SearchFilter.svelte";
-  import type { Post, SearchPost } from "$lib";
-  import { createSearchStore, searchHandler } from "$lib/stores/search";
   import { onDestroy } from "svelte";
-  import Paginator from "../components/Paginator.svelte";
+  import type { PageData } from "./$types";
+  import type { Comment, SearchComment } from "$lib";
+  import { createSearchStore, searchHandler } from "$lib/stores/search";
+  import CommentTable from "./../../../components/CommentTable.svelte";
+  import SearchFilter from "./../../../components/SearchFilter.svelte";
+  import Paginator from "./../../../components/Paginator.svelte";
 
   export let data: PageData;
 
-  const searchPosts: SearchPost[] = data.posts.map((post: Post) => ({
-    ...post,
-    searchTerms: `${post.title} ${post.slug_url} ${post.summary} ${post.author.full_name}`,
-  }));
+  const searchComments: SearchComment[] = data.comments.map(
+    (comment: Comment) => ({
+      ...comment,
+      searchTerms: `${comment.content} ${comment.author.full_name}`,
+    })
+  );
 
-  const searchStore = createSearchStore(searchPosts);
+  const searchStore = createSearchStore(searchComments);
   const unsubscribe = searchStore.subscribe((model) => searchHandler(model));
 
   let pageSize: number = 10;
   let currentPage: number = 1;
-  $: totalItems = searchPosts.length;
+  $: totalItems = searchComments.length;
   $: totalPages = Math.ceil(totalItems / pageSize);
   $: currentPage = currentPage <= totalPages ? currentPage : 1;
 
@@ -33,12 +35,12 @@
     class="flex flex-col gap-6 md:gap-0 md:flex-row md:justify-between md:items-end"
   >
     <h2 class="text-xl">
-      <i class="fas fa-list mr-3 text-primary-800 font-semibold"></i> Latest Posts
+      <i class="fas fa-list mr-3 text-primary-800 font-semibold"></i> Latest Comments
     </h2>
 
     <div class="md:basis-1/2 lg:basis-1/3">
       <SearchFilter
-        placeholderText="title, summary, author"
+        placeholderText="content, creator"
         bind:keyword={$searchStore.searchTerm}
       />
     </div>
@@ -46,11 +48,15 @@
 
   {#if $searchStore.filtered.length !== 0}
     <div class="bg-white overflow-auto my-8">
-      <PostTable posts={$searchStore.filtered} bind:pageSize bind:currentPage />
+      <CommentTable
+        comments={$searchStore.filtered}
+        bind:pageSize
+        bind:currentPage
+      />
     </div>
 
     <Paginator bind:pageSize bind:currentPage bind:totalItems bind:totalPages />
   {:else}
-    <p class="font-semibold text-lg mt-12">Ooops! No posts added yet</p>
+    <p class="font-semibold text-lg mt-12">Ooops! No comments added yet</p>
   {/if}
 </div>

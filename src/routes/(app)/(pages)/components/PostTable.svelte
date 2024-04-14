@@ -20,6 +20,7 @@
         <th class="py-3 w-72 lg:w-1/3 ms-4 lg:ms-0">Summary</th>
         <th class="text-center py-3 w-28">Status</th>
         <th class="py-3 w-24">modified at</th>
+        <th class="px-3 py-3">Comments</th>
       </tr>
     </thead>
 
@@ -50,7 +51,7 @@
           </td>
           <td class="py-1.5 w-48 lg:w-1/5">
             <a class="hover:text-blue-600" href="/posts/{post.slug_url}"
-              >{post.title.slice(0, 40)}</a
+              >{post.title.slice(0, 50)}</a
             ></td
           >
           <td class="py-1.5 w-72 lg:w-1/3 ms-4 lg:ms-0">
@@ -76,6 +77,28 @@
                 : getFormattedDate(post.created_at)}
             </p></td
           >
+          <td class="py-1.5 w-24">
+            <a
+              href="/posts/{post.slug_url}/comments"
+              class="flex items-center justify-center -space-x-1.5"
+            >
+              <span
+                class="w-4 h-4 rounded-full border border-sky-400 odd:bg-sky-700"
+              ></span>
+              <span
+                class="w-4 h-4 rounded-full border border-sky-400 odd:bg-sky-700"
+              ></span>
+              <span
+                class="w-4 h-4 rounded-full border border-sky-400 odd:bg-sky-700"
+              ></span>
+              <span
+                class="w-4 h-4 rounded-full border border-sky-400 odd:bg-sky-700"
+              ></span>
+              <span
+                class="w-4 h-4 rounded-full border border-sky-400 odd:bg-sky-700"
+              ></span>
+            </a>
+          </td>
         </tr>
       {/each}
     </tbody>
