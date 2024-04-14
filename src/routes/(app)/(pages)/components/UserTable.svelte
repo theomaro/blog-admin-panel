@@ -21,6 +21,7 @@
         <th class="ps-3 py-3">status</th>
         <th class="ps-3 py-3">Role</th>
         <th class="ps-3 py-3">login at</th>
+        <th class="ps-3 py-3">Posts</th>
       </tr>
     </thead>
 
@@ -85,6 +86,28 @@
               {user.last_login_at ? getFormattedDate(user.last_login_at) : ""}
             </p></td
           >
+          <td class="ps-3 py-1.5">
+            <a
+              href="/users/{user.username}/posts"
+              class="flex items-center justify-center -space-x-1.5"
+            >
+              <span
+                class="w-4 h-4 rounded-full border border-primary-400 even:bg-primary-300"
+              ></span>
+              <span
+                class="w-4 h-4 rounded-full border border-primary-400 even:bg-primary-300"
+              ></span>
+              <span
+                class="w-4 h-4 rounded-full border border-primary-400 even:bg-primary-300"
+              ></span>
+              <span
+                class="w-4 h-4 rounded-full border border-primary-400 even:bg-primary-300"
+              ></span>
+              <span
+                class="w-4 h-4 rounded-full border border-primary-400 even:bg-primary-300"
+              ></span>
+            </a>
+          </td>
         </tr>
       {/each}
     </tbody>

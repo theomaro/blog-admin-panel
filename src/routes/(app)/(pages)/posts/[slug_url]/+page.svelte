@@ -111,7 +111,7 @@
       Comments <span> &lpar;{data.comments.length}&rpar;</span>
     </h2>
 
-    <a href="/" class="text-emerald-700"
+    <a href="/posts/{data.post.slug_url}" class="text-emerald-700"
       >View all <i class="ri ri-arrow-right-line"></i></a
     >
   </div>
@@ -124,6 +124,10 @@
             <Comment {comment} />
           </a>
         </li>
+      {:else}
+        <div class="ps-4 h-16 leading-[4rem] text-sm">
+          <p>No comments for this post</p>
+        </div>
       {/each}
     </ul>
   </div>
